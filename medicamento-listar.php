@@ -6,9 +6,9 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <script src="js/color-modes.js"></script>
+    <script src="assets/js/color-modes.js"></script>
 
     <title>Sistema Acadêmico</title>
 </head>

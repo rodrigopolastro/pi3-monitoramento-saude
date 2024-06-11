@@ -9,8 +9,8 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/color-modes.js"></script>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <script src="assets/js/color-modes.js"></script>
 
     <title>Sistema Acadêmico</title>
 </head>
