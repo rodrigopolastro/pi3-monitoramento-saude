@@ -1,6 +1,6 @@
 <?php
 
-function buscarMedicamentos()
+function getAllMedicines()
 {
     global $connection;
     $statement = $connection->prepare(
@@ -17,4 +17,8 @@ function buscarMedicamentos()
 
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $results;
+}
+
+function createMedicine(){
+    
 }

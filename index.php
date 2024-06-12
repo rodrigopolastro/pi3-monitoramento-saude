@@ -1,2 +1,2 @@
 <?php
-header('Location: ./views/pages/medicamento-listar.php');
+header('Location: ./views/pages/list-medicines.php');

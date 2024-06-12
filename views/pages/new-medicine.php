@@ -1,5 +1,5 @@
 <?php 
-require '../components/cabecalho.php'; 
+require '../components/header.php'; 
 ?>
 
 <div class="container">
@@ -14,7 +14,8 @@ require '../components/cabecalho.php';
         <div class="row my-3">
             <div class="col-3"></div>
             <div class="col-6 bg-light p-3">
-                <form enctype="multipart/form-data" action="alunos-gravar.php" method="POST">
+                <input type="hidden" name="acao" value="insertMedicamento">
+                <form action="../../controllers/controller-medicamentos.php" method="POST">
                     <div class="mb-3">
                         <label for="txtnome" class="form-label">Nome do medicamento</label>
                         <input type="text" name="txtnome" class="form-control">
@@ -51,5 +52,5 @@ require '../components/cabecalho.php';
 </div>
 
 <?php 
-require '../components/rodape.php'; 
+require '../components/footer.php'; 
 ?>

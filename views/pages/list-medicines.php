@@ -1,9 +1,9 @@
 <?php 
-require '../components/cabecalho.php';
-require '../../db/conexao.php';
-require '../../db/queries/medicamentos.php';
+require '../components/header.php';
+// require '../../db/conexao.php';
+// require '../../models/medicamentos.php';
 
-$medicamentos = buscarMedicamentos();
+// $medicamentos = buscarMedicamentos();
 ?>
 
 <div class="container">
@@ -15,7 +15,7 @@ $medicamentos = buscarMedicamentos();
                 </h3>
             </div>
             <div class="col-2 position-absolute end-0">
-                <a class="btn btn-primary" href="./medicamento-inserir.php" role="button">
+                <a class="btn btn-primary" href="./new-medicine.php" role="button">
                     NOVO MEDICAMENTO
                 </a>
             </div>
@@ -39,7 +39,7 @@ $medicamentos = buscarMedicamentos();
                 <th>Doses Totais</th>
                 <th>Doses Tomadas</th>
             </thead>
-            <tbody>
+            <!-- <tbody>
                 <?php foreach($medicamentos as $medicamento): ?>
                     <tr>
                         <td><?= $medicamento['nome']; ?></td>
@@ -48,12 +48,12 @@ $medicamentos = buscarMedicamentos();
                         <td><button class="btn btn-primary">Visualizar Doses</button></td>
                     </tr>
                 <?php endforeach?>
-            </tbody>
+            </tbody> -->
         </table>
         <!-- <a href="./alunos-inserir.php">Novo Aluno</a>*******MUNDANÇA DE CAMINHO***** -->
     </div>
 </div>
-
+<script src="../requests/medicamentos-listar.js"></script>
 <?php 
-require '../components/rodape.php'; 
+require '../components/footer.php'; 
 ?>
