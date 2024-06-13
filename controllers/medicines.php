@@ -12,7 +12,7 @@ function controllerMedicines($action)
     switch ($action) {
         case 'select_medicines':
             $medicines = getAllMedicines();
-            return $select_medicines;
+            return $medicines;
             break;
 
         case 'insert_medicine':

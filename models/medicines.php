@@ -7,17 +7,23 @@ function getAllMedicines()
 {
     global $connection;
     $statement = $connection->prepare(
-        "SELECT
-            id_medicamento,
-            nome,
-            descricao,
-            doses_totais,
-            doses_tomadas,
-            inicio_tratamento,
-            fim_tratamento
-        FROM medicamentos"
+        "SELECT 
+            md.medicine_id,
+            md.medicine_name,
+            md.medicine_description,
+            md.doses_per_day,
+            md.quantity_per_dose,
+            md.treatment_start_date,
+            mt.portuguese_name medicine_type,
+            ft.portuguese_name frequency_type,
+            mu.portuguese_name measurement_unit
+        FROM medicines md 
+        INNER JOIN medicine_types mt  on mt.medicine_type_id = md.medicine_type_id
+        INNER JOIN frequency_types ft on ft.frequency_type_id = md.frequency_type_id
+        INNER JOIN measurement_units mu on mu.measurement_unit_id = md.measurement_unit_id"
     );
 
+    $statement->execute();
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $results;
 }

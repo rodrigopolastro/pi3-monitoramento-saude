@@ -37,6 +37,7 @@ CREATE TABLE Measurement_Units (
     portuguese_name VARCHAR(50) NOT NULL UNIQUE
 );
 
+-- Create singular and plural portuguese names
 INSERT INTO Measurement_Units (measurement_unit_name, portuguese_name) VALUES
 ('mL', 'mL'),
 ('drops', 'gotas'),
