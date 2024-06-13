@@ -1,13 +1,15 @@
 const HOURS_IN_A_DAY = 24;
 const HOUR_IN_MILISECONDS = 60 * 60 * 1000;
 let selectedHoursInterval, dosesTimesInputs, numberOfInputsToDisplay;
+const firstDoseTime = document.getElementById("firstDoseTime");
+const dateTime = new Date(0);
 
 window.addEventListener("load", displayDosesTimesInputs);
 function displayDosesTimesInputs() {
-    let dosesTimesDiv = document.getElementById("dosesTimesDiv");
+    const dosesTimesDiv = document.getElementById("dosesTimesDiv");
     dosesTimesInputs = Array.from(dosesTimesDiv.querySelectorAll("input"));
     dosesTimesInputs.shift(); //First input is fixed
-    let doses_hours_interval_inputs = document.getElementsByName(
+    const doses_hours_interval_inputs = document.getElementsByName(
         "doses_hours_interval"
     );
 
@@ -21,6 +23,10 @@ function displayDosesTimesInputs() {
                 dosesTimesInputs[i].hidden = false;
                 dosesTimesInputs[i].disabled = false;
             }
+
+            if (firstDoseTime.value) {
+                updateDosesTimes();
+            }
         });
     });
 }
@@ -33,12 +39,10 @@ function hideAllInputs(dosesTimesInputs) {
     });
 }
 
-let firstDoseTime = document.getElementById("firstDoseTime");
 firstDoseTime.addEventListener("change", updateDosesTimes);
 function updateDosesTimes() {
     let firstDoseHours = parseInt(firstDoseTime.value.split(":")[0]);
     let firstDoseMinutes = parseInt(firstDoseTime.value.split(":")[1]);
-    let dateTime = new Date(0);
     dateTime.setHours(firstDoseHours);
     dateTime.setMinutes(firstDoseMinutes);
     for (let i = 1; i <= numberOfInputsToDisplay - 1; i++) {
