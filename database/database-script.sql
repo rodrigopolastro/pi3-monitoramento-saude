@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS monitoramento_saude;
 CREATE DATABASE monitoramento_saude;
 USE monitoramento_saude;
 
------------------------------------------------
+-- ---------------------------------------------
 
 CREATE TABLE Medicine_Types (
     medicine_type_id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -15,20 +15,20 @@ INSERT INTO Medicine_Types (medicine_type_name, portuguese_name) VALUES
 ('pill', 'comprimido'),
 ('ointment', 'pomada');
 
------------------------------------------------
+-- ---------------------------------------------
 
-CREATE TABLE Frequency_Type (
+CREATE TABLE Frequency_Types (
     frequency_type_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     frequency_type_name VARCHAR(50) NOT NULL UNIQUE,
     portuguese_name VARCHAR(50) NOT NULL UNIQUE
 );
 
-INSERT INTO Frequency_Type (frequency_type_name, portuguese_name) VALUES
+INSERT INTO Frequency_Types (frequency_type_name, portuguese_name) VALUES
 ('daily', 'diário'),
 ('weekly', 'semanal'),
 ('days_interval', 'intervalo de dias');
 
------------------------------------------------
+-- ---------------------------------------------
 
 CREATE TABLE Measurement_Units (
     measurement_unit_id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -41,7 +41,7 @@ INSERT INTO Measurement_Units (measurement_unit_name, portuguese_name) VALUES
 ('drops', 'gotas'),
 ('pills', 'comprimidos');
 
------------------------------------------------
+-- ---------------------------------------------
 
 CREATE TABLE Medicines (
     medicine_id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -60,7 +60,7 @@ CREATE TABLE Medicines (
     ON DELETE RESTRICT,
  
     FOREIGN KEY (frequency_type_id)
-    REFERENCES Frequency_Type (frequency_type_id)
+    REFERENCES Frequency_Types (frequency_type_id)
     ON DELETE RESTRICT,
  
     FOREIGN KEY (measurement_unit_id)
@@ -68,7 +68,7 @@ CREATE TABLE Medicines (
     ON DELETE RESTRICT
 );
 
------------------------------------------------
+-- ---------------------------------------------
 
 CREATE TABLE Doses (
     dose_id INTEGER PRIMARY KEY AUTO_INCREMENT,
