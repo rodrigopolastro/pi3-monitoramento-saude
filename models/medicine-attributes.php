@@ -8,6 +8,9 @@
 -->
 
 <?php
+
+require_once fullPath('database/connection.php');
+
 function getAllMedicineTypes()
 {
     global $connection;

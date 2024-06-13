@@ -1,14 +1,16 @@
 <!-- 
     Controller for the tables:
         - Medicine_Types
-        - Frequency_Types,
+        - Frequency_Types
         - Measurement_Units
-    which are all simple tables to store 
-    possible names for certain medicine attributes
+    which are all simple tables to store the available
+    options for these certain medicine attributes
 -->
 
 <?php
-require fullPath('models/medicine-attributes.php');
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/pi3-monitoramento-saude/helpers/fullPath.php';
+require_once fullPath('models/medicine-attributes.php');
 
 if (isset($_POST['action'])) {
     controllerMedicineAttributes($_POST['action']);

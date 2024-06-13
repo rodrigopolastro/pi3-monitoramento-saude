@@ -1,8 +1,7 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/pi3-monitoramento-saude/helpers/fullPath.php';
-require fullPath('views/components/header.php');
-require fullPath('database/connection.php');
-require fullPath('controllers/medicine-attributes.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/pi3-monitoramento-saude/helpers/fullPath.php';
+require_once fullPath('views/components/header.php');
+require_once fullPath('controllers/medicine-attributes.php');
 
 $medicine_types    = controllerMedicineAttributes('select_medicine_types');
 $frequency_types   = controllerMedicineAttributes('select_frequency_types');
@@ -31,7 +30,7 @@ $measurement_units = controllerMedicineAttributes('select_measurement_units');
                     </div>
                     <div class="mb-3">
                         <label for="selMedicineType" class="form-label">Tipo de medicamento</label>
-                        <select id="selMedicineType" name="medicine_type" class="form-control">
+                        <select id="selMedicineType" name="medicine_type_id" class="form-control">
                             <?php foreach ($medicine_types as $medicine_type) : ?>
                                 <option value='<?= $medicine_type['medicine_type_id'] ?>'>
                                     <?= ucfirst($medicine_type['portuguese_name']) ?>
@@ -48,13 +47,21 @@ $measurement_units = controllerMedicineAttributes('select_measurement_units');
                                 </option>
                             <?php endforeach ?>
                         </select> -->
-                        <select id="selFrequencyType" name="frequency_type" class="form-control">
+                        <select id="selFrequencyType" name="frequency_type_id" class="form-control">
                             <option value='1'>Diário</option>
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="numTotalUsageDays" class="form-label">Duração do Tratamento (dias)</label>
+                        <input type="number" id="numTotalUsageDays" name="total_usage_days" class="form-control" value="1" min="1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="numDosesPerDay" class="form-label">Doses por dia</label>
+                        <input type="number" id="numDosesPerDay" name="doses_per_day" class="form-control" value="1" min="1">
+                    </div>
+                    <div class="mb-3">
                         <label for="selMeasurementUnit" class="form-label">Unidade de medida</label>
-                        <select id="selMeasurementUnit" name="measurement_unit" class="form-control">
+                        <select id="selMeasurementUnit" name="measurement_unit_id" class="form-control">
                             <?php foreach ($measurement_units as $measurement_unit) : ?>
                                 <option value='<?= $measurement_unit['measurement_unit_id'] ?>'>
                                     <?= $measurement_unit['portuguese_name'] == 'mL' ? 'mL' : ucfirst($measurement_unit['portuguese_name']) ?>
@@ -62,14 +69,22 @@ $measurement_units = controllerMedicineAttributes('select_measurement_units');
                             <?php endforeach ?>
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="numQuantityPerDose" class="form-label">Quantidade por dose</label>
+                        <input type="number" id="numQuantityPerDose" name="quantity_per_dose" class="form-control" value="1" min="1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dtTreatmentStartDate" class="form-label">Início do Tratamento</label>
+                        <input type="date" id="dtTreatmentStartDate" name="treatment_start_date" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">ADICIONAR</button>
                 </form>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">ADICIONAR</button>
         </div>
         <div class="col-3"></div>
     </div>
 </div>
 
 <?php
-require '../components/footer.php';
+require_once '../components/footer.php';
 ?>
