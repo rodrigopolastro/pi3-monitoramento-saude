@@ -79,13 +79,13 @@ $measurement_units = controllerMedicineAttributes('select_measurement_units');
                     </div>
                     <label class="form-label">Horários das Doses</label>
                     <div id="dosesTimesDiv" class="">
-                        <input                 type="time" name="dose_time_1" id="firstDoseTime" value="06:00" class="form-control w-100">
-                        <input hidden disabled type="time" name="dose_time_2" id="secondDoseTime" class="form-control w-50 bg-secondary" >
-                        <input hidden disabled type="time" name="dose_time_3" id="thirdDoseTime"  class="form-control w-50 bg-secondary" >
+                        <input type="time" name="dose_time_1" id="firstDoseTime" value="06:00" class="form-control w-100">
+                        <input hidden disabled type="time" name="dose_time_2" id="secondDoseTime" class="form-control w-50 bg-secondary">
+                        <input hidden disabled type="time" name="dose_time_3" id="thirdDoseTime" class="form-control w-50 bg-secondary">
                         <input hidden disabled type="time" name="dose_time_4" id="fourthDoseTime" class="form-control w-50 bg-secondary">
-                        <input hidden disabled type="time" name="dose_time_5" id="firthDoseTime"  class="form-control w-50 bg-secondary">
-                        <input hidden disabled type="time" name="dose_time_6" id="sixthDoseTime"  class="form-control w-50 bg-secondary">
-                    </div> 
+                        <input hidden disabled type="time" name="dose_time_5" id="firthDoseTime" class="form-control w-50 bg-secondary">
+                        <input hidden disabled type="time" name="dose_time_6" id="sixthDoseTime" class="form-control w-50 bg-secondary">
+                    </div>
                     <div class="mb-3">
                         <label for="selMeasurementUnit" class="form-label">Unidade de medida</label>
                         <select id="selMeasurementUnit" name="measurement_unit_id" class="form-control">
