@@ -1,49 +1,43 @@
-<?php 
-require '../components/header.php'; 
+<?php
+require $_SERVER['DOCUMENT_ROOT'] . '/pi3-monitoramento-saude/helpers/fullPath.php';
+require fullPath('views/components/header.php');
+require fullPath('database/connection.php');
+require fullPath('controllers/medicine-attributes.php');
+
+$medicine_types = controllerMedicineAttributes('select_medicine_types');
 ?>
 
 <div class="container">
     <div class="my-2">
         <div class="row justify-content-between">
             <div class="col-3">
-                <h3>
-                    NOVO MEDICAMENTO
-                </h3>
+                <h3>NOVO MEDICAMENTO</h3>
             </div>
         </div>
         <div class="row my-3">
             <div class="col-3"></div>
             <div class="col-6 bg-light p-3">
-                <input type="hidden" name="acao" value="insertMedicamento">
-                <form action="../../controllers/controller-medicamentos.php" method="POST">
+                <form action="../../controllers/medicines.php" method="POST">
+                    <input type="hidden" name="action" value="insert_medicine">
                     <div class="mb-3">
-                        <label for="txtnome" class="form-label">Nome do medicamento</label>
-                        <input type="text" name="txtnome" class="form-control">
+                        <label for="txtMedicineName" class="form-label">Nome do medicamento</label>
+                        <input type="text" id="txtMedicineName" name="medicine_name" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="txtemail" class="form-label">Descrição:</label>
-                        <input type="text" name="txtemail" class="form-control">
+                        <label for="txtMedicineDescription" class="form-label">Descrição:</label>
+                        <input type="text" id="txtMedicineDescription" name="medicine_description" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="txtfoto" class="form-label">Quantidade de doses:</label>
-                        <input type="number" name="Quantidade" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="selturma" class="form-label">Tipo de medicamento:</label>
-                        <select name="selturma" class="form-control">
-                            <option value=''>Selecione...</option>
-                            <option value='1'>Genérico</option>
-                            <option value='2'>Referência</option>
-                            <option value='3'>Similar</option>
+                        <label for="selMedicineType" class="form-label">Tipo de medicamento:</label>
+                        <select id="selMedicineType" name="medicine_type" class="form-control">
+                            <?php foreach ($medicine_types as $medicine_type) : ?>
+                                <option value='<?= $medicine_type['medicine_type_id'] ?>'>
+                                    <?= ucfirst($medicine_type['portuguese_name']) ?>
+                                </option>
+                            <?php endforeach ?>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="txtfoto" class="form-label">Começo do tratamento:</label>
-                    </div>
-                    <div class="mb-3">
-                        <label for="txtfoto" class="form-label">Final do tratamento:</label>
-                        <input type="date" name="Quantidade" class="form-control">
-                    </div>
+                </form>
             </div>
             <button type="submit" class="btn btn-primary btn-block">ADICIONAR</button>
         </div>
@@ -51,6 +45,6 @@ require '../components/header.php';
     </div>
 </div>
 
-<?php 
-require '../components/footer.php'; 
+<?php
+require '../components/footer.php';
 ?>
