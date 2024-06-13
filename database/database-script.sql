@@ -5,7 +5,7 @@ USE monitoramento_saude;
 -- ---------------------------------------------
 
 CREATE TABLE Medicine_Types (
-    medicine_type_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    medicine_type_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
     medicine_type_name VARCHAR(50) NOT NULL UNIQUE,
     portuguese_name VARCHAR(50) NOT NULL UNIQUE
 );
@@ -18,7 +18,7 @@ INSERT INTO Medicine_Types (medicine_type_name, portuguese_name) VALUES
 -- ---------------------------------------------
 
 CREATE TABLE Frequency_Types (
-    frequency_type_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    frequency_type_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
     frequency_type_name VARCHAR(50) NOT NULL UNIQUE,
     portuguese_name VARCHAR(50) NOT NULL UNIQUE
 );
@@ -32,7 +32,7 @@ INSERT INTO Frequency_Types (frequency_type_name, portuguese_name) VALUES
 -- ---------------------------------------------
 
 CREATE TABLE Measurement_Units (
-    measurement_unit_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    measurement_unit_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
     measurement_unit_name VARCHAR(50) NOT NULL UNIQUE,
     portuguese_name VARCHAR(50) NOT NULL UNIQUE
 );
@@ -45,10 +45,10 @@ INSERT INTO Measurement_Units (measurement_unit_name, portuguese_name) VALUES
 -- ---------------------------------------------
 
 CREATE TABLE Medicines (
-    medicine_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    medicine_type_id INTEGER,
-    frequency_type_id INTEGER,
-    measurement_unit_id INTEGER,
+    medicine_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    medicine_type_id INTEGER NOT NULL,
+    frequency_type_id INTEGER NOT NULL,
+    measurement_unit_id INTEGER NOT NULL,
     medicine_name VARCHAR(100) NOT NULL,
     medicine_description VARCHAR(300),
     doses_per_day INTEGER NOT NULL,
@@ -72,8 +72,8 @@ CREATE TABLE Medicines (
 -- ---------------------------------------------
 
 CREATE TABLE Doses (
-    dose_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    medicine_id INTEGER,
+    dose_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    medicine_id INTEGER NOT NULL,
     due_date DATE NOT NULL,
     due_time TIME NOT NULL,
     taken_date DATE NOT NULL,
