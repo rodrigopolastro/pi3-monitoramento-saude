@@ -1,9 +1,11 @@
-<?php 
-require '../components/header.php';
-// require '../../db/conexao.php';
-// require '../../models/medicamentos.php';
+<?php
+require $_SERVER['DOCUMENT_ROOT'] . '/pi3-monitoramento-saude/helpers/fullPath.php';
 
-// $medicamentos = buscarMedicamentos();
+require fullPath('views/components/header.php');
+require fullPath('database/connection.php');
+require fullPath('controllers/medicines.php');
+
+// $medicines = controllerMedicines('select_medicines');
 ?>
 
 <div class="container">
@@ -54,6 +56,6 @@ require '../components/header.php';
     </div>
 </div>
 <script src="../requests/medicamentos-listar.js"></script>
-<?php 
-require '../components/footer.php'; 
+<?php
+require '../components/footer.php';
 ?>
