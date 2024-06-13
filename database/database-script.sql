@@ -2,11 +2,20 @@ DROP DATABASE IF EXISTS monitoramento_saude;
 CREATE DATABASE monitoramento_saude;
 USE monitoramento_saude;
 
+-----------------------------------------------
+
 CREATE TABLE Medicine_Types (
     medicine_type_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     medicine_type_name VARCHAR(50) NOT NULL UNIQUE,
     portuguese_name VARCHAR(50) NOT NULL UNIQUE
 );
+
+INSERT INTO Medicine_Types (medicine_type_name, portuguese_name) VALUES
+('liquid', 'líquido'),
+('pill', 'comprimido'),
+('ointment', 'pomada');
+
+-----------------------------------------------
 
 CREATE TABLE Frequency_Type (
     frequency_type_id INTEGER PRIMARY KEY AUTO_INCREMENT,
@@ -14,18 +23,32 @@ CREATE TABLE Frequency_Type (
     portuguese_name VARCHAR(50) NOT NULL UNIQUE
 );
 
+INSERT INTO Frequency_Type (frequency_type_name, portuguese_name) VALUES
+('daily', 'diário'),
+('weekly', 'semanal'),
+('days_interval', 'intervalo de dias');
+
+-----------------------------------------------
+
 CREATE TABLE Measurement_Units (
     measurement_unit_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     measurement_unit_name VARCHAR(50) NOT NULL UNIQUE,
     portuguese_name VARCHAR(50) NOT NULL UNIQUE
 );
 
+INSERT INTO Measurement_Units (measurement_unit_name, portuguese_name) VALUES
+('mL', 'mL'),
+('drops', 'gotas'),
+('pills', 'comprimidos');
+
+-----------------------------------------------
+
 CREATE TABLE Medicines (
     medicine_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     medicine_type_id INTEGER,
     frequency_type_id INTEGER,
     measurement_unit_id INTEGER,
-    quantity_per_dose INTEGER NOT NULL,
+    quantity_per_dose INTEGER,
     medicine_name VARCHAR(100) NOT NULL,
     medicine_description VARCHAR(300),
     treatment_start_date DATE NOT NULL,
@@ -45,6 +68,8 @@ CREATE TABLE Medicines (
     ON DELETE RESTRICT
 );
 
+-----------------------------------------------
+
 CREATE TABLE Doses (
     dose_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     medicine_id INTEGER,
@@ -58,7 +83,3 @@ CREATE TABLE Doses (
     REFERENCES Medicines (medicine_id)
     ON DELETE CASCADE
 );
-
-
-
-
