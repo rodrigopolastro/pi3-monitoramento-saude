@@ -23,9 +23,13 @@ function controllerMedicineAttributes($action)
             break;
 
         case 'select_frequency_types':
+            $frequency_types = getAllFrequencyTypes();
+            return $frequency_types;
             break;
 
         case 'select_measurement_units':
+            $measurement_units = getAllMeasurementUnits();
+            return $measurement_units;
             break;
 
         default:

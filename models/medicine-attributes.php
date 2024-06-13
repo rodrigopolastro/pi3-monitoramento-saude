@@ -11,7 +11,6 @@
 function getAllMedicineTypes()
 {
     global $connection;
-    // var_dump($connection);
     $statement = $connection->prepare(
         "SELECT
             medicine_type_id,
@@ -21,14 +20,35 @@ function getAllMedicineTypes()
 
     $statement->execute();
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($results);
     return $results;
 }
 
 function getAllFrequencyTypes()
 {
+    global $connection;
+    $statement = $connection->prepare(
+        "SELECT
+            frequency_type_id,
+            portuguese_name
+        FROM frequency_types"
+    );
+
+    $statement->execute();
+    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $results;
 }
 
 function getAllMeasurementUnits()
 {
+    global $connection;
+    $statement = $connection->prepare(
+        "SELECT
+            measurement_unit_id,
+            portuguese_name
+        FROM measurement_units"
+    );
+
+    $statement->execute();
+    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $results;
 }
