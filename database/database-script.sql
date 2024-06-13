@@ -26,6 +26,7 @@ CREATE TABLE Frequency_Types (
 INSERT INTO Frequency_Types (frequency_type_name, portuguese_name) VALUES
 ('daily', 'diário'),
 ('weekly', 'semanal'),
+('monthly', 'mensal'),
 ('days_interval', 'intervalo de dias');
 
 -- ---------------------------------------------
@@ -48,12 +49,12 @@ CREATE TABLE Medicines (
     medicine_type_id INTEGER,
     frequency_type_id INTEGER,
     measurement_unit_id INTEGER,
-    quantity_per_dose INTEGER,
     medicine_name VARCHAR(100) NOT NULL,
     medicine_description VARCHAR(300),
-    treatment_start_date DATE NOT NULL,
     doses_per_day INTEGER NOT NULL,
-    total_doses INTEGER NOT NULL,
+    quantity_per_dose INTEGER NOT NULL,
+    treatment_start_date DATE NOT NULL,
+    total_usage_days INTEGER NOT NULL,
 
     FOREIGN KEY (medicine_type_id)
     REFERENCES Medicine_Types (medicine_type_id)
