@@ -77,8 +77,8 @@ CREATE TABLE Doses (
     medicine_id INTEGER NOT NULL,
     due_date DATE NOT NULL,
     due_time TIME NOT NULL,
-    taken_date DATE NOT NULL,
-    taken_time TIME NOT NULL,
+    taken_date DATE,
+    taken_time TIME,
     was_taken BOOLEAN NOT NULL,
     
     FOREIGN KEY (medicine_id)
