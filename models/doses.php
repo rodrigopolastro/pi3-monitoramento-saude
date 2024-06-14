@@ -9,7 +9,7 @@ function getAllDoses()
         "SELECT 
             md.medicine_name,
             md.quantity_per_dose,
-            mu.portuguese_name,
+            mu.portuguese_name measurement_unit,
             ds.dose_id,
             ds.due_date,
             ds.due_time,
@@ -34,7 +34,7 @@ function getDosesFromMedicineId($medicine_id)
         "SELECT 
             md.medicine_name,
             md.quantity_per_dose,
-            mu.portuguese_name,
+            mu.portuguese_name measurement_unit,
             ds.dose_id,
             ds.due_date,
             ds.due_time,

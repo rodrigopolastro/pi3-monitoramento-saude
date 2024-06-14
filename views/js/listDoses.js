@@ -45,13 +45,11 @@ async function listDoses(params) {
     }
 }
 
-// TO DO: Create separate layouts for displaying 
-// all the doses and the doses of a medicine
 function displayDoseDiv(dose) {
     let doseHtml = `
         <div class="d-flex">
             <p>${dose.due_date} - ${dose.due_time}</p>
-            <h6>${dose.medicine_name}: ${dose.quantity_per_dose} ${dose.portuguese_name}</h6>
+            <h6>${dose.medicine_name}: ${dose.quantity_per_dose} ${dose.measurement_unit}</h6>
         </div>
     `;
 
