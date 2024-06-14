@@ -2,7 +2,6 @@
 
 require_once fullPath('database/connection.php');
 
-
 function getAllMedicines()
 {
     global $connection;
@@ -66,4 +65,6 @@ function createMedicine($medicine)
     $statement->bindValue(':total_usage_days', $medicine['total_usage_days']);
 
     $statement->execute();
+
+    return $connection->lastInsertId();
 }

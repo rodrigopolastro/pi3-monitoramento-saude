@@ -58,10 +58,8 @@ $medicines = controllerMedicines('select_medicines');
                 <?php endforeach?>
             </tbody>
         </table>
-        <!-- <a href="./alunos-inserir.php">Novo Aluno</a>*******MUNDANÇA DE CAMINHO***** -->
     </div>
 </div>
-<script src="../requests/medicamentos-listar.js"></script>
 <?php
 require_once '../components/footer.php';
 ?>

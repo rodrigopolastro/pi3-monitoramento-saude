@@ -22,7 +22,7 @@ $measurement_units = controllerMedicineAttributes('select_measurement_units');
                     <input type="hidden" name="action" value="insert_medicine">
                     <div class="mb-3">
                         <label for="txtMedicineName" class="form-label">Nome do medicamento</label>
-                        <input type="text" id="txtMedicineName" name="medicine_name" class="form-control" value="rodrigo">
+                        <input type="text" id="txtMedicineName" name="medicine_name" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="txtMedicineDescription" class="form-label">Descrição</label>
@@ -55,6 +55,7 @@ $measurement_units = controllerMedicineAttributes('select_measurement_units');
                         <label for="numTotalUsageDays" class="form-label">Duração do Tratamento (dias)</label>
                         <input type="number" id="numTotalUsageDays" name="total_usage_days" class="form-control" value="1" min="1">
                     </div>
+                    <!-- Allow custom time for doses -->
                     <!-- <div class="mb-3">
                         <label for="numDosesPerDay" class="form-label">Doses por dia</label>
                         <input type="number" id="numDosesPerDay" name="doses_per_day" class="form-control" value="1" min="1">
@@ -76,7 +77,7 @@ $measurement_units = controllerMedicineAttributes('select_measurement_units');
                     </div>
                     <label class="form-label">Horários das Doses</label>
                     <div id="dosesTimesDiv" class="">
-                        <input type="time" name="dose_time_1" id="firstDoseTime" value="06:00" class="form-control w-100">
+                        <input type="time" name="dose_time_1" id="firstDoseTime" value="05:00" class="form-control w-100">
                         <input required readonly hidden disabled type="time" name="dose_time_2" id="secondDoseTime" class="form-control w-50 bg-secondary">
                         <input required readonly hidden disabled type="time" name="dose_time_3" id="thirdDoseTime" class="form-control w-50 bg-secondary">
                         <input required readonly hidden disabled type="time" name="dose_time_4" id="fourthDoseTime" class="form-control w-50 bg-secondary">
