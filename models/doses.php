@@ -2,6 +2,58 @@
 
 require_once fullPath('database/connection.php');
 
+function getAllDoses()
+{
+    global $connection;
+    $statement = $connection->prepare(
+        "SELECT 
+            md.medicine_name,
+            md.quantity_per_dose,
+            mu.portuguese_name,
+            ds.dose_id,
+            ds.due_date,
+            ds.due_time,
+            ds.taken_date,
+            ds.taken_time,
+            ds.was_taken
+        FROM doses ds 
+        INNER JOIN medicines md on md.medicine_id = ds.medicine_id
+        INNER JOIN measurement_units mu on mu.measurement_unit_id = md.measurement_unit_id
+        ORDER BY ds.due_date, ds.due_time"
+    );
+
+    $statement->execute();
+    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $results;
+}
+
+function getDosesFromMedicineId($medicine_id)
+{
+    global $connection;
+    $statement = $connection->prepare(
+        "SELECT 
+            md.medicine_name,
+            md.quantity_per_dose,
+            mu.portuguese_name,
+            ds.dose_id,
+            ds.due_date,
+            ds.due_time,
+            ds.taken_date,
+            ds.taken_time,
+            ds.was_taken
+        FROM doses ds 
+        INNER JOIN medicines md on md.medicine_id = ds.medicine_id
+        INNER JOIN measurement_units mu on mu.measurement_unit_id = md.measurement_unit_id
+        WHERE ds.medicine_id = :medicine_id
+        ORDER BY ds.due_date, ds.due_time"
+    );
+
+    $statement->bindValue(':medicine_id', $medicine_id);
+    $statement->execute();
+    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $results;
+}
+
 function createDose($dose)
 {
     global $connection;

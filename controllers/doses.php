@@ -12,6 +12,21 @@ if (isset($_GET['action'])) {
 function controllerDoses($action)
 {
     switch ($action) {
+        case 'select_all_doses':
+            $doses = getAllDoses();
+            echo json_encode($doses);
+            break;
+
+        case 'select_medicine_doses':
+            $medicine_id = $_POST['medicine_id'];
+            // echo $medicine_id;
+            // header("Location: /pi-monitoramento-saude/?a=" . $medicine_id);
+            $doses = getDosesFromMedicineId($medicine_id);
+
+            // echo json_encode($_POST['medicine_id']);
+            echo json_encode($doses);
+            break;
+        
         case 'insert_medicine_doses':
             $date_time = DateTimeImmutable::createFromFormat(
                 'Y-m-d', 
