@@ -19,33 +19,46 @@ function controllerDoses($action)
 
         case 'select_medicine_doses':
             $medicine_id = $_POST['medicine_id'];
-            // echo $medicine_id;
-            // header("Location: /pi-monitoramento-saude/?a=" . $medicine_id);
             $doses = getDosesFromMedicineId($medicine_id);
-
-            // echo json_encode($_POST['medicine_id']);
             echo json_encode($doses);
             break;
-        
+
         case 'insert_medicine_doses':
-            $date_time = DateTimeImmutable::createFromFormat(
-                'Y-m-d', 
+            $initial_date_time = DateTimeImmutable::createFromFormat(
+                'Y-m-d',
                 $_GET['treatment_start_date'],
                 new DateTimeZone('America/Sao_Paulo')
             );
             $total_usage_days = $_GET['total_usage_days'];
-            for ($day_increment = 0; $day_increment < $total_usage_days; $day_increment++) {
-                $increment_string = 'P'. $day_increment+1 . 'D';
-                $dose_due_date = $date_time->add(new DateInterval($increment_string))->format('Y-m-d');
-                for ($i = 1; $i <= $_GET['doses_per_day']; $i++) {
+
+            // what we call "today's midnight" actually belongs to "tomorrow"
+            $days_increment = $_GET['dose_time_1'] == '00:00' ? 1 : 0; 
+
+            for ($days_increment = 0; $days_increment < $total_usage_days; $days_increment++) {
+                $increment_string = 'P' . $days_increment . 'D';
+                $dose_due_date = $initial_date_time->add(new DateInterval($increment_string))->format('Y-m-d');
+                for ($dose_time_index = 1; $dose_time_index <= $_GET['doses_per_day']; $dose_time_index++) {
+                    $dose_due_time = $_GET['dose_time_' . $dose_time_index];
+
+                    // increase one day if the dose time has overflowed
+                    if ($dose_due_time < $_GET['dose_time_1']) {
+                        $dose_due_date++;
+                    }
+
                     $dose = [
                         'medicine_id' => $_GET['medicine_id'],
                         'due_date' =>    $dose_due_date,
-                        'due_time' =>    $_GET['dose_time_' . $i],
-                        'taken_date' =>  NULL,
-                        'taken_time' =>  NULL,
-                        'was_taken' =>   FALSE,
+                        'due_time' =>    $dose_due_time,
                     ];
+                    foreach ($dose as $key => $value) {
+                        if (empty($value)) {
+                            $dose[$key] = NULL;
+                        }
+                    }
+                    $dose['taken_date'] = NULL;
+                    $dose['taken_time'] = NULL;
+                    $dose['was_taken'] = FALSE;
+
                     createDose($dose);
                 }
             }
