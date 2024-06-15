@@ -6,7 +6,7 @@ require_once fullPath('models/medicines.php');
 define('HOURS_IN_A_DAY', 24);
 
 if (isset($_POST['action'])) {
-        controllerMedicines($_POST['action']);
+    controllerMedicines($_POST['action']);
 }
 
 function controllerMedicines($action)
@@ -31,6 +31,12 @@ function controllerMedicines($action)
                 'treatment_start_date' => $_POST['treatment_start_date'],
                 'total_usage_days' => $_POST['total_usage_days'],
             ];
+
+            foreach ($medicine as $key => $value) {
+                if (empty($value)) {
+                    $medicine[$key] = NULL;
+                }
+            }
 
             $created_medicine_id = createMedicine($medicine);
             if ($created_medicine_id) {
