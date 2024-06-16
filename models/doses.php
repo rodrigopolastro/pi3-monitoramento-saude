@@ -27,6 +27,24 @@ function getAllDoses()
     return $results;
 }
 
+function countMedicineDoses($medicine_id)
+{
+    global $connection;
+    $statement = $connection->prepare(
+        "SELECT 
+            (SELECT COUNT(*) FROM doses WHERE medicine_id = :medicine_id ) 
+                AS 'total_doses',
+            (SELECT COUNT(*) FROM doses WHERE medicine_id = :medicine_id 
+                AND was_taken = TRUE) 
+                AS 'taken_doses'"
+    );
+
+    $statement->bindValue(':medicine_id', $medicine_id);
+    $statement->execute();
+    $results = $statement->fetch(PDO::FETCH_ASSOC);
+    return $results;
+}
+
 function getDosesFromMedicineId($medicine_id)
 {
     global $connection;
@@ -50,6 +68,7 @@ function getDosesFromMedicineId($medicine_id)
 
     $statement->bindValue(':medicine_id', $medicine_id);
     $statement->execute();
+
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $results;
 }

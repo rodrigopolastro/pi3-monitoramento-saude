@@ -5,16 +5,18 @@ window.addEventListener("load", () => {
     listDoses(params);
 });
 
-const btnShowUpcomingDoses = document.getElementById("btnShowUpcomingDoses");
-btnShowUpcomingDoses.addEventListener("click", () => {
-    let params = new URLSearchParams({
-        action: "select_all_doses",
-    });
-    listDoses(params);
-});
+document
+    .getElementById("btnShowUpcomingDoses")
+    .addEventListener("click", () => {
+        document.getElementById("divDosesCounter").classList.add("d-none");
 
-const viewDosesButtonsList = document.getElementsByName("btnViewDoses");
-viewDosesButtonsList.forEach((viewDosesBtn) => {
+        let params = new URLSearchParams({
+            action: "select_all_doses",
+        });
+        listDoses(params);
+    });
+
+document.getElementsByName("btnViewDoses").forEach((viewDosesBtn) => {
     viewDosesBtn.addEventListener("click", () => {
         let params = new URLSearchParams({
             action: "select_medicine_doses",
@@ -24,11 +26,12 @@ viewDosesButtonsList.forEach((viewDosesBtn) => {
     });
 });
 
-const dosesList = document.getElementById("divDosesList");
+let dosesList = document.getElementById("divDosesList");
 async function listDoses(params) {
     try {
         fetch("../../controllers/doses.php", {
             method: "POST",
+            mode: "same-origin",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },

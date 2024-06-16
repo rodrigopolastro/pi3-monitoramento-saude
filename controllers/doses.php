@@ -23,16 +23,27 @@ function controllerDoses($action)
             echo json_encode($doses);
             break;
 
+        case 'count_medicine_doses':
+            $medicine_id = $_POST['medicine_id'];
+            $number_doses = countMedicineDoses($medicine_id);
+            echo json_encode($number_doses);
+            break;
+
         case 'insert_medicine_doses':
             $initial_date_time = DateTimeImmutable::createFromFormat(
                 'Y-m-d',
                 $_GET['treatment_start_date'],
                 new DateTimeZone('America/Sao_Paulo')
             );
-            
+
             // what we call "today's midnight" actually belongs to "tomorrow"
             $days_increment = $_GET['dose_time_1'] == '00:00' ? 1 : 0;
-            
+
+            //Funciona bem, mas é mais inteligente calcular os valores de doses diária
+            //de todas as doses a partir da primeira utilizando o objeto dateTime quando forem
+            //doses diárias com intervalos padrões. 
+            //só usar cada um dos valores para doses
+            //cujos horários são personalizados
             for ($days_increment; $days_increment < $$_GET['total_usage_days']; $days_increment++) {
                 $increment_string = 'P' . $days_increment . 'D';
                 $dose_due_date = $initial_date_time->add(new DateInterval($increment_string));
