@@ -45,8 +45,20 @@ INSERT INTO Measurement_Units (measurement_unit_name, portuguese_name) VALUES
 
 -- ---------------------------------------------
 
+CREATE TABLE Users (
+    user_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    user_email VARCHAR(50) UNIQUE NOT NULL,
+    user_password VARCHAR(100) NOT NULL,
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP,
+);
+
+-- ---------------------------------------------
+
 CREATE TABLE Medicines (
     medicine_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    user_id INTEGER NOT NULL,
     medicine_type_id INTEGER NOT NULL,
     frequency_type_id INTEGER NOT NULL,
     measurement_unit_id INTEGER NOT NULL,
@@ -56,6 +68,10 @@ CREATE TABLE Medicines (
     quantity_per_dose INTEGER NOT NULL,
     treatment_start_date DATE NOT NULL,
     total_usage_days INTEGER NOT NULL,
+
+    FOREIGN KEY (user_id)
+    REFERENCES Users (user_id)
+    ON DELETE CASCADE,
 
     FOREIGN KEY (medicine_type_id)
     REFERENCES Medicine_Types (medicine_type_id)
