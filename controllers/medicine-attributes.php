@@ -9,7 +9,7 @@
 
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/pi3-monitoramento-saude/helpers/fullPath.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/pi3-monitoramento-saude/helpers/full-path.php';
 require_once fullPath('models/medicine-attributes.php');
 
 if (isset($_POST['action'])) {
