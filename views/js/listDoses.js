@@ -26,7 +26,8 @@ document.getElementsByName("btnViewDoses").forEach((viewDosesBtn) => {
     });
 });
 
-let dosesList = document.getElementById("divDosesList");
+let nextDosesList = document.getElementById("nextDosesList");
+let takenDosesList = document.getElementById("takenDosesList");
 async function listDoses(params) {
     try {
         fetch("../../controllers/doses.php", {
@@ -40,21 +41,39 @@ async function listDoses(params) {
             .then((response) => response.json())
             .then((doses) => {
                 console.log(doses);
-                dosesList.innerHTML = "";
-                doses.forEach((dose) => displayDoseDiv(dose));
+
+                nextDosesList.innerHTML = "";
+                doses.not_taken_doses.forEach((dose) =>
+                    displayDoseDiv(nextDosesList, dose)
+                );
+
+                if (doses.taken_doses) {
+                    document
+                        .getElementById("takenDosesDiv")
+                        .classList.remove("d-none");
+                    takenDosesList.innerHTML = "";
+                    doses.taken_doses.forEach((dose) => {
+                        displayDoseDiv(takenDosesList, dose);
+                    });
+                } else {
+                    document
+                        .getElementById("takenDosesDiv")
+                        .classList.add("d-none");
+                }
             });
     } catch (error) {
         console.error("Error in Request:", error);
     }
 }
 
-function displayDoseDiv(dose) {
+function displayDoseDiv(parentElement, dose) {
     let doseHtml = `
-        <div class="d-flex">
+        <div class="">
+            <p>was taken: ${dose.was_taken}</p>
             <p>${dose.due_date} - ${dose.due_time}</p>
             <h6>${dose.medicine_name}: ${dose.quantity_per_dose} ${dose.measurement_unit}</h6>
         </div>
     `;
 
-    dosesList.innerHTML += doseHtml;
+    parentElement.innerHTML += doseHtml;
 }

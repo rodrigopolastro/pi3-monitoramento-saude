@@ -13,13 +13,24 @@ function controllerDoses($action)
 {
     switch ($action) {
         case 'select_all_doses':
-            $doses = getAllDoses();
+            $doses = ['not_taken_doses' => getNextDoses() ];
             echo json_encode($doses);
             break;
 
         case 'select_medicine_doses':
             $medicine_id = $_POST['medicine_id'];
-            $doses = getDosesFromMedicineId($medicine_id);
+            $results = getDosesFromMedicineId($medicine_id);
+            $doses = [
+                'taken_doses' => [],
+                'not_taken_doses' => [],
+            ];
+            foreach ($results as $dose) {
+                if ($dose['was_taken']) {
+                    array_push($doses['taken_doses'], $dose);
+                } else {
+                    array_push($doses['not_taken_doses'], $dose);
+                }
+            }
             echo json_encode($doses);
             break;
 

@@ -2,7 +2,7 @@
 
 require_once fullPath('database/connection.php');
 
-function getAllDoses()
+function getNextDoses()
 {
     global $connection;
     $statement = $connection->prepare(
@@ -19,7 +19,8 @@ function getAllDoses()
         FROM doses ds 
         INNER JOIN medicines md on md.medicine_id = ds.medicine_id
         INNER JOIN measurement_units mu on mu.measurement_unit_id = md.measurement_unit_id
-        ORDER BY ds.due_date, ds.due_time"
+        WHERE ds.was_taken = FALSE
+        ORDER BY ds.due_date ASC, ds.due_time ASC"
     );
 
     $statement->execute();
@@ -62,8 +63,7 @@ function getDosesFromMedicineId($medicine_id)
         FROM doses ds 
         INNER JOIN medicines md on md.medicine_id = ds.medicine_id
         INNER JOIN measurement_units mu on mu.measurement_unit_id = md.measurement_unit_id
-        WHERE ds.medicine_id = :medicine_id
-        ORDER BY ds.due_date, ds.due_time"
+        WHERE ds.medicine_id = :medicine_id"
     );
 
     $statement->bindValue(':medicine_id', $medicine_id);

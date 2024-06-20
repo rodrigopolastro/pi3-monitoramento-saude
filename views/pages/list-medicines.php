@@ -60,8 +60,16 @@ $medicines = controllerMedicines('select_medicines');
                 <p class="fw-bold">Doses Tomadas</h6>
             </div>
             <button id="btnShowUpcomingDoses" class="btn btn-primary">Visualizar Próximas Doses</button>
-            <div id="divDosesList">
-                <!-- The list of doses is generated dinamically by javascript -->
+            <div>
+                <!-- The doses lists are generated dinamically by javascript -->
+                <div id="nextDosesDiv">
+                    <h4>Próximas Doses</h4>
+                    <div id="nextDosesList"></div>
+                </div>
+                <div id="takenDosesDiv">
+                    <h4>Doses Tomadas</h4>
+                    <div id="takenDosesList"></div>
+                </div>
             </div>
         </div>
     </div>
