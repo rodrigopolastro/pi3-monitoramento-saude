@@ -7,6 +7,7 @@ function getNextDoses()
     global $connection;
     $statement = $connection->prepare(
         "SELECT 
+            md.medicine_id,
             md.medicine_name,
             md.quantity_per_dose,
             mu.portuguese_name measurement_unit,
@@ -51,6 +52,7 @@ function getDosesFromMedicineId($medicine_id)
     global $connection;
     $statement = $connection->prepare(
         "SELECT 
+            md.medicine_id,
             md.medicine_name,
             md.quantity_per_dose,
             mu.portuguese_name measurement_unit,
@@ -100,5 +102,39 @@ function createDose($dose)
     $statement->bindValue(':taken_date',  $dose['taken_date']);
     $statement->bindValue(':taken_time',  $dose['taken_time']);
     $statement->bindValue(':was_taken',   $dose['was_taken']);
+    $statement->execute();
+}
+
+function takeDose($dose)
+{
+    global $connection;
+    $statement = $connection->prepare(
+        "UPDATE doses SET 
+        was_taken = TRUE, 
+        taken_date = :taken_date,
+        taken_time = :taken_time
+      WHERE dose_id = :dose_id"
+    );
+
+    $statement->bindValue(':dose_id', $dose['dose_id']);
+    $statement->bindValue(':taken_date', $dose['taken_date']);
+    $statement->bindValue(':taken_time', $dose['taken_time']);
+    $statement->execute();
+}
+
+function setDoseNotTaken($dose)
+{
+    global $connection;
+    $statement = $connection->prepare(
+        "UPDATE doses SET 
+        was_taken = FALSE, 
+        taken_date = :taken_date,
+        taken_time = :taken_time
+      WHERE dose_id = :dose_id"
+    );
+
+    $statement->bindValue(':dose_id', $dose['dose_id']);
+    $statement->bindValue(':taken_date', $dose['taken_date']);
+    $statement->bindValue(':taken_time', $dose['taken_time']);
     $statement->execute();
 }

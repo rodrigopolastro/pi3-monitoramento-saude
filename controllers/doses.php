@@ -13,7 +13,7 @@ function controllerDoses($action)
 {
     switch ($action) {
         case 'select_all_doses':
-            $doses = ['not_taken_doses' => getNextDoses() ];
+            $doses = ['not_taken_doses' => getNextDoses()];
             echo json_encode($doses);
             break;
 
@@ -86,6 +86,33 @@ function controllerDoses($action)
             }
             header('Location: /pi3-monitoramento-saude/views/pages/list-medicines.php');
             exit();
+            break;
+
+        case 'take_dose':
+            $date = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
+            try {
+                takeDose([
+                    'dose_id' => $_POST['dose_id'],
+                    'taken_date' => $date->format('Y-m-d'),
+                    'taken_time' => $date->format('H:i:00'),
+                ]);
+                echo json_encode(['success' => true]);
+            } catch (PDOException $exception) {
+                echo json_encode(['success' => false, 'exception' => $exception->getMessage()]);
+            }
+            break;
+
+        case 'set_dose_not_taken':
+            try {
+                setDoseNotTaken([
+                    'dose_id' => $_POST['dose_id'],
+                    'taken_date' => NULL,
+                    'taken_time' => NULL,
+                ]);
+                echo json_encode(['success' => true]);
+            } catch (PDOException $exception) {
+                echo json_encode(['success' => false, 'exception' => $exception->getMessage()]);
+            }
             break;
 
         default:

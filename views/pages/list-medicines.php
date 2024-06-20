@@ -75,8 +75,8 @@ $medicines = controllerMedicines('select_medicines');
     </div>
 </div>
 
-<script src="../js/listDoses.js"></script>
 <script src="../js/displayDosesNumber.js"></script>
+<script src="../js/listDoses.js"></script>
 
 <?php
 require_once '../components/footer.php';
