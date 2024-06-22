@@ -29,6 +29,7 @@ function controllerUsers($action)
                 $user_id = createUser($user);
 
                 $_SESSION['user_id']         = $user_id;
+                $_SESSION['user_email']      = $user['user_email'];
                 $_SESSION['user_first_name'] = $user['first_name'];
                 $_SESSION['user_last_name']  = $user['last_name'];
 
@@ -41,6 +42,7 @@ function controllerUsers($action)
             $user = getUserByEmail($_POST['email']);
             if ($user && $user['user_password'] == hash('sha256', trim($_POST['password']))) {
                 $_SESSION['user_id']         = $user['user_id'];
+                $_SESSION['user_email']      = $user['user_email'];
                 $_SESSION['user_first_name'] = $user['first_name'];
                 $_SESSION['user_last_name']  = $user['last_name'];
 
