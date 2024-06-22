@@ -5,6 +5,9 @@ require_once fullPath('models/medicines.php');
 
 define('HOURS_IN_A_DAY', 24);
 
+if (!isset($_SESSION)) {
+    session_start();
+}
 if (isset($_POST['action'])) {
     controllerMedicines($_POST['action']);
 }
@@ -21,6 +24,7 @@ function controllerMedicines($action)
             $doses_per_day = HOURS_IN_A_DAY / $_POST['doses_hours_interval'];
 
             $medicine = [
+                'user_id' => $_SESSION['user_id'],
                 'medicine_type_id' => $_POST['medicine_type_id'],
                 'frequency_type_id' => $_POST['frequency_type_id'],
                 'measurement_unit_id' => $_POST['measurement_unit_id'],
@@ -43,6 +47,7 @@ function controllerMedicines($action)
                 $query_string =
                     '?action=insert_medicine_doses' .
                     '&medicine_id=' . $created_medicine_id .
+                    '&medicine_name=' . $medicine['medicine_name'] .
                     '&treatment_start_date=' . $_POST['treatment_start_date'] .
                     '&total_usage_days=' . $_POST['total_usage_days'] .
                     '&doses_per_day=' . $doses_per_day;

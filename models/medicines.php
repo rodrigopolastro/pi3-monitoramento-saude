@@ -32,6 +32,7 @@ function createMedicine($medicine)
     global $connection;
     $statement = $connection->prepare(
         "INSERT INTO medicines (
+            user_id,
             medicine_type_id,
             frequency_type_id,
             measurement_unit_id,
@@ -42,6 +43,7 @@ function createMedicine($medicine)
             treatment_start_date,
             total_usage_days
         ) VALUES (
+            :user_id,
             :medicine_type_id,
             :frequency_type_id,
             :measurement_unit_id,
@@ -54,6 +56,7 @@ function createMedicine($medicine)
         )"
     );
 
+    $statement->bindValue(':user_id', $medicine['user_id']);
     $statement->bindValue(':medicine_type_id', $medicine['medicine_type_id']);
     $statement->bindValue(':frequency_type_id', $medicine['frequency_type_id']);
     $statement->bindValue(':measurement_unit_id', $medicine['measurement_unit_id']);
