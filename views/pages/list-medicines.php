@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pi3-monitoramento-saude/helpers/full-path.php';
-require_once fullPath('scripts/session_authentication.php');
+require_once fullPath('scripts/session-authentication.php');
 require_once fullPath('views/components/header.php');
 require_once fullPath('controllers/medicines.php');
 
@@ -57,8 +57,8 @@ $medicines = controllerMedicines('select_medicines');
                     <span id="takenDosesCounter"></span>
                     /
                     <span id="totalDosesCounter"></span>
+                    Doses Tomadas
                 </p>
-                <p class="fw-bold">Doses Tomadas</h6>
             </div>
             <button id="btnShowUpcomingDoses" class="btn btn-primary">Visualizar Próximas Doses</button>
             <div>
