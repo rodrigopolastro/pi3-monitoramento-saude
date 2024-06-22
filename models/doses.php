@@ -103,6 +103,8 @@ function createDose($dose)
     $statement->bindValue(':taken_time',  $dose['taken_time']);
     $statement->bindValue(':was_taken',   $dose['was_taken']);
     $statement->execute();
+
+    return $connection->lastInsertId();
 }
 
 function takeDose($dose)

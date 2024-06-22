@@ -2,6 +2,7 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pi3-monitoramento-saude/helpers/full-path.php';
 require_once fullPath('models/doses.php');
+require_once fullPath('scripts/schedule-dose-reminder.php');
 
 if (isset($_GET['action'])) {
     controllerDoses($_GET['action']);
@@ -55,7 +56,7 @@ function controllerDoses($action)
             //doses diárias com intervalos padrões. 
             //só usar cada um dos valores para doses
             //cujos horários são personalizados
-            for ($days_increment; $days_increment < $$_GET['total_usage_days']; $days_increment++) {
+            for ($days_increment; $days_increment < $_GET['total_usage_days']; $days_increment++) {
                 $increment_string = 'P' . $days_increment . 'D';
                 $dose_due_date = $initial_date_time->add(new DateInterval($increment_string));
                 for ($dose_time_index = 1; $dose_time_index <= $_GET['doses_per_day']; $dose_time_index++) {
@@ -81,7 +82,10 @@ function controllerDoses($action)
                     $dose['taken_time'] = NULL;
                     $dose['was_taken'] = FALSE;
 
-                    createDose($dose);
+                    $dose_id = createDose($dose);
+                    $dose['dose_id'] = $dose_id;
+                    $dose['medicine_name'] = $_GET['medicine_name'];
+                    scheduleDoseReminder($dose);
                 }
             }
             header('Location: /pi3-monitoramento-saude/views/pages/list-medicines.php');

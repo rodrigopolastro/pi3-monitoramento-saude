@@ -26,7 +26,6 @@ function getUserByEmail($user_email)
 
 function createUser($user)
 {
-    var_dump($user);
     global $connection;
     $statement = $connection->prepare(
         "INSERT INTO users (
