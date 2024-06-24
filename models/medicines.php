@@ -2,7 +2,7 @@
 
 require_once fullPath('database/mysql-connection.php');
 
-function getAllMedicines()
+function getAllMedicines($user_id)
 {
     global $connection;
     $statement = $connection->prepare(
@@ -19,9 +19,11 @@ function getAllMedicines()
         FROM medicines md 
         INNER JOIN medicine_types mt  on mt.medicine_type_id = md.medicine_type_id
         INNER JOIN frequency_types ft on ft.frequency_type_id = md.frequency_type_id
-        INNER JOIN measurement_units mu on mu.measurement_unit_id = md.measurement_unit_id"
+        INNER JOIN measurement_units mu on mu.measurement_unit_id = md.measurement_unit_id
+        WHERE md.user_id = :user_id"
     );
 
+    $statement->bindValue(':user_id', $user_id);
     $statement->execute();
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $results;

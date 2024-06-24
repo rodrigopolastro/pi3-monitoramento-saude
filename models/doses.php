@@ -2,7 +2,7 @@
 
 require_once fullPath('database/mysql-connection.php');
 
-function getNextDoses()
+function getNextDoses($user_id)
 {
     global $connection;
     $statement = $connection->prepare(
@@ -21,9 +21,11 @@ function getNextDoses()
         INNER JOIN medicines md on md.medicine_id = ds.medicine_id
         INNER JOIN measurement_units mu on mu.measurement_unit_id = md.measurement_unit_id
         WHERE ds.was_taken = FALSE
+        AND md.user_id = :user_id
         ORDER BY ds.due_date ASC, ds.due_time ASC"
     );
 
+    $statement->bindValue(':user_id', $user_id);
     $statement->execute();
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $results;
@@ -70,7 +72,6 @@ function getDosesFromMedicineId($medicine_id)
 
     $statement->bindValue(':medicine_id', $medicine_id);
     $statement->execute();
-
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $results;
 }

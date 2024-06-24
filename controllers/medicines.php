@@ -16,7 +16,7 @@ function controllerMedicines($action)
 {
     switch ($action) {
         case 'select_medicines':
-            $medicines = getAllMedicines();
+            $medicines = getAllMedicines($_SESSION['user_id']);
             return $medicines;
             break;
 

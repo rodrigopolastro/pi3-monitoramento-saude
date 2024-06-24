@@ -4,6 +4,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/pi3-monitoramento-saude/helpers/full-
 require_once fullPath('models/doses.php');
 require_once fullPath('scripts/schedule-dose-reminder.php');
 
+
+if (!isset($_SESSION)) {
+    session_start();
+}
 if (isset($_GET['action'])) {
     controllerDoses($_GET['action']);
 } else if (isset($_POST['action'])) {
@@ -14,7 +18,7 @@ function controllerDoses($action)
 {
     switch ($action) {
         case 'select_all_doses':
-            $doses = ['not_taken_doses' => getNextDoses()];
+            $doses = ['not_taken_doses' => getNextDoses($_SESSION['user_id'])];
             echo json_encode($doses);
             break;
 
