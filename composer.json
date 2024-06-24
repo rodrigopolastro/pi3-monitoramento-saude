@@ -1,5 +1,6 @@
 {
     "require": {
-        "sendgrid/sendgrid": "^8.1"
+        "sendgrid/sendgrid": "^8.1",
+        "mongodb/mongodb": "^1.19"
     }
 }

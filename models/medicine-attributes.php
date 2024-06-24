@@ -9,7 +9,7 @@
 
 <?php
 
-require_once fullPath('database/connection.php');
+require_once fullPath('database/mysql-connection.php');
 
 function getAllMedicineTypes()
 {

@@ -3,7 +3,7 @@
 $server = "localhost";
 $user = "root";
 $password = "";
-$database = "monitoramento_saude";
+$database = "health_monitoring";
 
 try {
     $connection = new PDO(

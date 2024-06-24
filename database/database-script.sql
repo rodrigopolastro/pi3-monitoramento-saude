@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS monitoramento_saude;
-CREATE DATABASE monitoramento_saude;
-USE monitoramento_saude;
+DROP DATABASE IF EXISTS health_monitoring;
+CREATE DATABASE health_monitoring;
+USE health_monitoring;
 
 -- ---------------------------------------------
 
@@ -51,7 +51,7 @@ CREATE TABLE Users (
     user_password VARCHAR(100) NOT NULL,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP,
+    created_at TIMESTAMP
 );
 
 -- ---------------------------------------------
