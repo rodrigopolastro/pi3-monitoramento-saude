@@ -21,8 +21,7 @@
                 <div class="col-sm-4">
                     <ul class="nav me-lg-auto mb-2 justify-content-center mb-md-0">
                         <li><a href="./list-medicines.php" class="nav-link px-3 text-white">Medicamentos</a></li><!--*******MUNDANÇA DE CAMINHO*****-->
-                        <li><a href="./health-data.php" class="nav-link px-3 text-white">Histórico</a></li><!--*******MUNDANÇA DE CAMINHO*****-->
-                        <li><a href="#" class="nav-link px-3 text-white">Batimentos</a></li>
+                        <li><a href="./health-monitoring.php" class="nav-link px-3 text-white">Histórico</a></li><!--*******MUNDANÇA DE CAMINHO*****-->
                     </ul>
                 </div>
 

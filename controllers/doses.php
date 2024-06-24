@@ -86,12 +86,12 @@ function controllerDoses($action)
                     $dose['dose_id'] = $dose_id;
                     $dose['medicine_name'] = $_GET['medicine_name'];
 
-                    // ONLY SCHEDULE DOSES OF THE DAY!
+                    // TODO: ONLY SCHEDULE DOSES OF THE DAY!
                     scheduleDoseReminder($dose);
                 }
             }
-            // header('Location: /pi3-monitoramento-saude/views/pages/list-medicines.php');
-            // exit();
+            header('Location: /pi3-monitoramento-saude/views/pages/list-medicines.php');
+            exit();
             break;
 
         case 'take_dose':
