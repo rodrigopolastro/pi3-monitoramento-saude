@@ -13,11 +13,11 @@ function scheduleDoseReminder($dose)
     $email = new Mail();
     $email->setFrom(EMAIL_SENDER, 'Monitoramento de Saúde');
     $email->setSubject('Você tem uma dose de medicamento para tomar!');
-    $email->addTo($_SESSION['user_email'], 'Example Recipient');
+    $email->addTo($_SESSION['companion_user_email'], 'Example Recipient');
 
     $email_content = "
         <h1> Chegou a hora de tomar sua dose! </h1>
-        <h3>Medicamento:" . $_SESSION['user_email'] . "</h3> 
+        <h3>Medicamento:" . $_SESSION['companion_user_email'] . "</h3> 
         <h3>Horário: " . $dose['due_date'] . ' às ' . $dose['due_time'] . '</h3>
         <p>Não desista, continue firme!</p>';
 

@@ -74,7 +74,8 @@ function sendAlert($timestamp, $sensors, $alerts){
     $email = new Mail();
     $email->setFrom(EMAIL_SENDER, 'Monitoramento de Saúde');
     $email->setSubject('ALERTA - Sinais Vitais Preocupantes!');
-    $email->addTo($_SESSION['user_email'], 'Example Recipient');
+    // $email->addTo($_SESSION['companion_user_email'], 'Example Recipient');
+    $email->addTo($_SESSION['companion_user_email'], '');
 
     $formatted_time = DateTimeImmutable::createFromFormat(
         'Y-m-d H:i:s',
@@ -83,7 +84,7 @@ function sendAlert($timestamp, $sensors, $alerts){
     );
 
     $email_content = 
-        "<p> Os sinais vitais de <strong>" .  $_SESSION['user_first_name'] . "</strong> atingiram níveis preocupantes </p>" .
+        "<p> Os sinais vitais de <strong>" .  $_SESSION['user_first_name'] .  $_SESSION['user_last_name'] . "</strong> atingiram níveis preocupantes </p>" .
         "<h1> Sinais Vitais: </h1>" .
         "<h3>Captura realizada em " . $formatted_time->format("d/m/Y") . ' às ' . $formatted_time->format("H:i:s") . '</h3>' .
         "<p><strong>Batimentos Cardíacos: </strong>" . $sensors['heart_rate'] . ' BPM - ' . $alerts['heart_rate']['message'] . "</p>" .
@@ -98,18 +99,20 @@ function sendAlert($timestamp, $sensors, $alerts){
     $sendgrid = new \SendGrid(SENDGRID_API_KEY);
     try {
         $response = $sendgrid->send($email);
-    //     // echo '<pre>';
+
+        // echo '<pre>';
     //     // echo "<h3>Criando lembrete para dose " . $dose['dose_id'] . "</h3>";
     //     // echo "Response status:" . $response->statusCode();
 
-    //     // var_dump($response);
+        // echo 'enviando para: ' . $_SESSION['companion_user_email'];
+        // var_dump($response);
     //     // $headers = array_filter($response->headers());
     //     // echo "Response Headers\n";
     //     // foreach ($headers as $header) {
     //     //     echo " - " . $header . "\n";
     //     // }
     //     // echo '<hr>';
-    //     // echo '</pre>';
+        // echo '</pre>';
     } catch (Exception $e) {
         echo 'Caught exception: ' . $e->getMessage() . "\n";
     }
