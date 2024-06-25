@@ -49,3 +49,28 @@ function createUser($user)
 
     return $connection->lastInsertId();
 }
+
+function createCompanionUser($companion_user)
+{
+    global $connection;
+    $statement = $connection->prepare(
+        "INSERT INTO companion_users (
+            monitored_user_id,
+            user_email, 
+            first_name, 
+            last_name
+        ) VALUES (
+            :monitored_user_id,
+            :user_email, 
+            :first_name, 
+            :last_name
+        )"
+    );
+
+    $statement->bindValue(':monitored_user_id', $companion_user['monitored_user_id']);
+    $statement->bindValue(':user_email', $companion_user['user_email']);
+    $statement->bindValue(':first_name', $companion_user['first_name']);
+    $statement->bindValue(':last_name', $companion_user['last_name']);
+    $statement->execute();
+
+}

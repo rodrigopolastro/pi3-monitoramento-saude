@@ -25,13 +25,24 @@ function controllerUsers($action)
                     'first_name'    => $_POST['first_name'],
                     'last_name'     => $_POST['last_name'],
                 ];
+                try {
+                    $user_id = createUser($user);
 
-                $user_id = createUser($user);
+                    $companion_user = [
+                        'monitored_user_id' => $user_id,
+                        'user_email'    => $_POST['companion_email'],
+                        'first_name'    => $_POST['companion_first_name'],
+                        'last_name'     => $_POST['companion_last_name'],
+                    ];
+                    createCompanionUser($companion_user);
 
-                $_SESSION['user_id']         = $user_id;
-                $_SESSION['user_email']      = $user['user_email'];
-                $_SESSION['user_first_name'] = $user['first_name'];
-                $_SESSION['user_last_name']  = $user['last_name'];
+                    $_SESSION['user_id']         = $user_id;
+                    $_SESSION['companion_user_email']      = $_POST['companion_email'];
+                    $_SESSION['user_first_name'] = $user['first_name'];
+                    $_SESSION['user_last_name']  = $user['last_name'];
+                } catch (PDOException $exception) {
+                    echo $exception->getMessage();
+                }
 
                 header("Location: /pi3-monitoramento-saude/views/pages/list-medicines.php");
                 exit();

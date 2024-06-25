@@ -56,6 +56,21 @@ CREATE TABLE Users (
 
 -- ---------------------------------------------
 
+CREATE TABLE Companion_Users (
+    companion_user_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    monitored_user_id INTEGER NOT NULL,
+    user_email VARCHAR(50) UNIQUE NOT NULL,
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP,
+
+    FOREIGN KEY (monitored_user_id)
+    REFERENCES Users (user_id)
+    ON DELETE RESTRICT
+);
+
+-- ---------------------------------------------
+
 CREATE TABLE Medicines (
     medicine_id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
     user_id INTEGER NOT NULL,
