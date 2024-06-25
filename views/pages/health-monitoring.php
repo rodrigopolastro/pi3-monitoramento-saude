@@ -25,7 +25,6 @@ require_once fullPath('controllers/sensors-data.php');
                 <button type="button" data-sensor-name="blood_oxygen" class="btn btn-outline-primary">Oxigênio no Sangue</button>
                 <button type="button" data-sensor-name="blood_pressure" class="btn btn-outline-success">Pressão Sanguínea</button>
             </div>
-            <button id="updateBtn">Update</button>
             <canvas id="sensorsCanvas" width="400" height="180"></canvas>
         </div>
     </div>

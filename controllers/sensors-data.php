@@ -2,6 +2,7 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pi3-monitoramento-saude/helpers/full-path.php';
 require_once fullPath('models/sensors-data.php');
+require_once fullPath('scripts/analyse-sensor-data.php');
 
 if (!isset($_SESSION)) {
     session_start();
@@ -51,6 +52,7 @@ function controllerSensorsData($action)
                     'was_inserted' => true,
                     'inserted_record' => $inserted_record
                 ]);
+                analyzeSensorData($timestamp, $sensors);
 
             } catch (Exception $e) {
                 echo json_encode([
@@ -58,6 +60,7 @@ function controllerSensorsData($action)
                     'message' => $e->getMessage(),
                 ]);
             }
+
             break;
 
         default:

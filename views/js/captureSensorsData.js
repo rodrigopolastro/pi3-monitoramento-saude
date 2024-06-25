@@ -28,7 +28,7 @@ function captureSensorsData() {
         action: "insert_sensors_data",
         heart_rate: getRandomInt(40, 120),
         body_temperature: getRandomInt(35, 39),
-        blood_oxygen: getRandomInt(90, 100),
+        blood_oxygen: getRandomInt(85, 100),
         blood_pressure: getRandomInt(80, 130),
     });
     recordSensorsData(params);
