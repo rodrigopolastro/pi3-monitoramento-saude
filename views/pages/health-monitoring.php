@@ -3,30 +3,32 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/pi3-monitoramento-saude/helpers/full-
 require_once fullPath('scripts/session-authentication.php');
 require_once fullPath('views/components/header.php');
 require_once fullPath('controllers/sensors-data.php');
-
-var_dump($_SESSION);
 ?>
 
-<div class="container">
+<div class="container my-5">
     <div class="row">
-        <div class="col-6">
-            <div class="form-check form-switch">
-                <input id="captureSwitch" class="form-check-input" type="checkbox" role="switch">
-                <label for="captureSwitch" class="form-check-label">Captura Automática de Dados</label>
+        <div class="col-5">
+            <div class="d-flex justify-content-between align-items-center pb-3">
+                <button id="captureBtn" class="btn btn-info">Capturar Dados Agora</button>
+                <div class="form-check form-switch">
+                    <input id="captureSwitch" class="form-check-input" type="checkbox" role="switch">
+                    <label for="captureSwitch" class="form-check-label">Captura Automática de Dados</label>
+                </div>
             </div>
-            <button id="captureBtn">Capturar Dados Agora</button>
             <div id="sensorsRecordsList">
                 <!-- Loaded dinamically with javascript -->
             </div>
         </div>
-        <div class="col-6">
-            <div id="sensorsButtonsList" class="d-flex">
-                <button type="button" data-sensor-name="heart_rate" class="btn btn-outline-danger">Batimentos por Minuto</button>
-                <button type="button" data-sensor-name="body_temperature" class="btn btn-outline-warning">Temperatura Corporal</button>
-                <button type="button" data-sensor-name="blood_oxygen" class="btn btn-outline-primary">Oxigênio no Sangue</button>
-                <button type="button" data-sensor-name="blood_pressure" class="btn btn-outline-success">Pressão Sanguínea</button>
+        <div class="col-7">
+            <div id="sensorsButtonsList" class="d-flex mb-4">
+                <button type="button" data-sensor-name="heart_rate" class="ms-2 btn btn-danger">Batimentos por Minuto</button>
+                <button type="button" data-sensor-name="body_temperature" class="ms-2 btn btn-warning">Temperatura Corporal</button>
+                <button type="button" data-sensor-name="blood_oxygen" class="ms-2 btn btn-primary">Oxigênio no Sangue</button>
+                <button type="button" data-sensor-name="blood_pressure" class="ms-2 btn btn-success">Pressão Sanguínea</button>
             </div>
-            <canvas id="sensorsCanvas" width="400" height="180"></canvas>
+            <div class="bg-white rounded-4 p-3">
+                <canvas id="sensorsCanvas"></canvas>
+            </div>
         </div>
     </div>
 </div>
@@ -34,6 +36,7 @@ var_dump($_SESSION);
 <!-- Biblioteca Chart.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
+<script src="../../helpers/formatTime.js"></script>
 <script src="../js/sensorsGraph.js"></script>
 <script src="../js/displaySensorsRecord.js"></script>
 <script src="../js/listSensorsRecords.js"></script>
