@@ -48,11 +48,11 @@ async function recordSensorsData(params) {
             if (response.was_inserted) {
                 console.log("Dados capturados corretamente!: \n" + params);
                 displaySensorsRecord(response.inserted_record, true);
-                
-                // Update list with new data 
+
+                // Update list with new data
                 let params2 = new URLSearchParams({
                     action: "select_sensor_data",
-                    sensor_name: 'heart_rate',
+                    sensor_name: "heart_rate",
                 });
                 getSensorData(params2);
             } else {

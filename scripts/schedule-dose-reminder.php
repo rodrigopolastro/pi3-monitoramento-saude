@@ -10,41 +10,63 @@ if (!isset($_SESSION)) {
 
 function scheduleDoseReminder($dose)
 {
-    $email = new Mail();
-    $email->setFrom(EMAIL_SENDER, 'Monitoramento de Saúde');
-    $email->setSubject('Você tem uma dose de medicamento para tomar!');
-    $email->addTo($_SESSION['companion_user_email'], 'Example Recipient');
-
-    $email_content = "
-        <h1> Chegou a hora de tomar sua dose! </h1>
-        <h3>Medicamento:" . $_SESSION['companion_user_email'] . "</h3> 
-        <h3>Horário: " . $dose['due_date'] . ' às ' . $dose['due_time'] . '</h3>
-        <p>Não desista, continue firme!</p>';
-
-    $email->addContent('text/html', $email_content);
+    $sendgrid = new \SendGrid(SENDGRID_API_KEY);
     $dose_time = DateTimeImmutable::createFromFormat(
         'Y-m-d H:i',
         $dose['due_date'] . ' ' . $dose['due_time'],
         new DateTimeZone('America/Sao_Paulo')
     );
 
-    $email->setSendAt($dose_time->getTimestamp());
-    $sendgrid = new \SendGrid(SENDGRID_API_KEY);
-    try {
-        // TODO: Check if it was really created and inform user
-        $response = $sendgrid->send($email);
-        // echo '<pre>';
-        // echo "<h3>Criando lembrete para dose " . $dose['dose_id'] . "</h3>";
-        // echo "Response status:" . $response->statusCode();
+    $email_content = "
+        <h1> Chegou a hora de tomar sua dose! </h1>
+        <h3>Medicamento:" . $dose['medicine_name'] . "</h3> 
+        <h3>Horário: " . $dose_time->format("d/m/Y") . ' às ' . $dose['due_time'] . '</h3>
+        <p>Não desista, continue firme!</p>';
+    sendToMonitoredUser($sendgrid, $dose_time, $email_content);
 
-        // var_dump($response);
-        // $headers = array_filter($response->headers());
-        // echo "Response Headers\n";
-        // foreach ($headers as $header) {
-        //     echo " - " . $header . "\n";
-        // }
-        // echo '<hr>';
-        // echo '</pre>';
+    $email_content = "
+        <h1>" . $_SESSION['user_first_name'] . $_SESSION['user_last_name'] . "deve tomar uma dose agora! </h1>
+        <h3>Medicamento:" . $dose['medicine_name'] . "</h3> 
+        <h3>Horário: " . $dose_time->format("d/m/Y") . ' às ' . $dose['due_time'] . '</h3>
+        <p>Continue acompanhando a saúde de quem você ama conosco!</p>';
+    sendToCompanionUser($sendgrid, $dose_time, $email_content);
+
+}
+
+function sendToMonitoredUser($sendgrid, $dose_time, $email_content)
+{
+    $email = new Mail();
+    $email->setFrom(EMAIL_SENDER, 'Monitoramento de Saúde');
+    $email->setSubject('Você tem uma dose de medicamento para tomar!');
+    $email->addTo($_SESSION['user_email'], 'Example Recipient');
+    $email->addContent('text/html', $email_content);
+
+    $email->setSendAt($dose_time->getTimestamp());
+
+    try {
+        $response = $sendgrid->send($email);
+        var_dump($response);
+    } catch (Exception $e) {
+        echo 'Caught exception: ' . $e->getMessage() . "\n";
+    }
+}
+
+function sendToCompanionUser($sendgrid, $dose_time, $email_content)
+{
+    $email = new Mail();
+    $email->setFrom(EMAIL_SENDER, 'Monitoramento de Saúde');
+    $email->setSubject(
+        $_SESSION['user_first_name'] . $_SESSION['user_last_name'] .
+            " recebeu um lembrete para tomar uma dose!"
+    );
+    $email->addTo($_SESSION['companion_user_email'], '');
+    $email->addContent('text/html', $email_content);
+    $email->setSendAt($dose_time->getTimestamp());
+
+
+    try {
+        $response = $sendgrid->send($email);
+        var_dump($response);
     } catch (Exception $e) {
         echo 'Caught exception: ' . $e->getMessage() . "\n";
     }

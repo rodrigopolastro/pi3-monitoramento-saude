@@ -7,14 +7,16 @@ function getUserByEmail($user_email)
     global $connection;
     $statement = $connection->prepare(
         "SELECT 
-            user_id,
-            user_email,
-            user_password,
-            first_name,
-            last_name,
-            created_at
-       FROM users
-       WHERE user_email = :user_email"
+            u.user_id,
+            u.user_email,
+            c.user_email companion_user_email,
+            u.user_password,
+            u.first_name,
+            u.last_name,
+            u.created_at
+       FROM users u
+       INNER JOIN companion_users c ON c.monitored_user_id = u.user_id
+       WHERE u.user_email = :user_email"
     );
 
     $statement->bindValue(':user_email', $user_email);

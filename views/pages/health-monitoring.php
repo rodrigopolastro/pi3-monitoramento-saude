@@ -4,6 +4,7 @@ require_once fullPath('scripts/session-authentication.php');
 require_once fullPath('views/components/header.php');
 require_once fullPath('controllers/sensors-data.php');
 
+var_dump($_SESSION);
 ?>
 
 <div class="container">
