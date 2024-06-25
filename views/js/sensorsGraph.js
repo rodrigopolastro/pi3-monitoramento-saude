@@ -18,7 +18,7 @@ const sensorsChart = new Chart(ctx, {
 window.addEventListener("load", () => {
     let params = new URLSearchParams({
         action: "select_sensor_data",
-        sensor_name: 'heart_rate',
+        sensor_name: "heart_rate",
     });
     getSensorData(params);
 });
@@ -51,7 +51,7 @@ async function getSensorData(params) {
             let newData = [];
 
             data.records.forEach((sensor_record) => {
-                newLabels.unshift(sensor_record.timestamp);
+                newLabels.unshift(formatTime(sensor_record.timestamp));
                 newData.unshift(sensor_record.sensors_data[data.sensorName]);
             });
             updateChart(newLabels, newData);
@@ -62,4 +62,23 @@ function updateChart(newLabels, newData) {
     sensorsChart.data.datasets[0].data = newData;
     sensorsChart.data.labels = newLabels;
     sensorsChart.update();
+}
+
+function formatTime(timestamp) {
+    let dateObject = new Date(timestamp);
+    let hours =
+        dateObject.getHours() < 10
+            ? "0" + dateObject.getHours()
+            : dateObject.getHours();
+    let minutes =
+        dateObject.getMinutes() < 10
+            ? "0" + dateObject.getMinutes()
+            : dateObject.getMinutes();
+    let seconds =
+        dateObject.getSeconds() < 10
+            ? "0" + dateObject.getSeconds()
+            : dateObject.getSeconds();
+
+    let formattedTime = hours + ":" + minutes + ":" + seconds;
+    return formattedTime;
 }
