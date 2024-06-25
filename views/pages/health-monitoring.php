@@ -14,16 +14,8 @@ require_once fullPath('controllers/sensors-data.php');
                 <label for="captureSwitch" class="form-check-label">Captura Automática de Dados</label>
             </div>
             <button id="captureBtn">Capturar Dados Agora</button>
-            <div>
-                <div>
-                    <p>sensor 1</p>
-                </div>
-                <div>
-                    <p>sensor 2</p>
-                </div>
-                <div>
-                    <p>sensor 3</p>
-                </div>
+            <div id="sensorsRecordsList">
+                <!-- Loaded dinamically with javascript -->
             </div>
         </div>
         <div class="col-6">
@@ -39,10 +31,11 @@ require_once fullPath('controllers/sensors-data.php');
     <button id="updateBtn">Update</button>
 </div>
 
-<!-- Biblioteca Chart.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 <script src="../js/sensorsGraph.js"></script>
 <script src="../js/captureSensorsData.js"></script>
+<script src="../js/listSensorsRecords.js"></script>
+<!-- Biblioteca Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
 <?php
 require_once fullPath('views/components/footer.php');

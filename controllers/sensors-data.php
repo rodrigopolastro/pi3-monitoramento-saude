@@ -13,6 +13,11 @@ if (isset($_POST['action'])) {
 function controllerSensorsData($action)
 {
     switch ($action) {
+        case 'select_sensors_data':
+            $sensors_records = getSensorsRecords($_SESSION['user_id']);
+            echo json_encode($sensors_records);
+            break;
+
         case 'insert_sensors_data':
             $user_id = $_SESSION['user_id'];
             

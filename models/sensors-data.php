@@ -1,6 +1,16 @@
 <?php
-
 require_once fullPath('database/mongo-connection.php');
+
+function getSensorsRecords($user_id){
+    $filter = ['user_id' => $user_id];
+
+    
+    global $sensors_data_collection;
+    $cursor = $sensors_data_collection->find($filter);
+    $documents = $cursor->toArray();
+
+    return $documents;
+}
 
 function recordSensorsData($user_id, $timestamp, $sensors){
     $document = [
