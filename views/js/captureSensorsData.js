@@ -45,6 +45,7 @@ async function recordSensorsData(params) {
     })
         .then((response) => response.json())
         .then((response) => {
+            console.log(response);
             if (response.was_inserted) {
                 console.log("Dados capturados corretamente!: \n" + params);
                 displaySensorsRecord(response.inserted_record, true);
@@ -55,6 +56,12 @@ async function recordSensorsData(params) {
                     sensor_name: "heart_rate",
                 });
                 getSensorData(params2);
+
+                if(response.is_alert_on){
+                    document.getElementById("alertMessage").classList.remove("d-none");
+                } else {
+                    document.getElementById("alertMessage").classList.add("d-none");
+                }
             } else {
                 console.log("Ocorreu um erro na captura dos dados.");
             }

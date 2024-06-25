@@ -48,9 +48,11 @@ function controllerSensorsData($action)
 
             try {
                 $inserted_record = recordSensorsData($user_id, $timestamp, $sensors);
+                $result = analyzeSensorData($timestamp, $sensors);
                 echo json_encode([
                     'was_inserted' => true,
                     'inserted_record' => $inserted_record,
+                    'is_alert_on' => $result
                     // 'is_alert_on' => analyzeSensorData($timestamp, $sensors),
                 ]);
             

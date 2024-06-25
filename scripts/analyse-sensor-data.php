@@ -64,10 +64,12 @@ function analyzeSensorData($timestamp, $sensors){
 
     foreach ($alerts as $key => $array) {
         if($array['alert']){
-            sendAlert($timestamp, $sensors, $alerts);
+            // sendAlert($timestamp, $sensors, $alerts);
+            return true;
             break;
         }
     }
+    return false;
 }
 
 function sendAlert($timestamp, $sensors, $alerts){

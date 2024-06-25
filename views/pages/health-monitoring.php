@@ -15,6 +15,9 @@ require_once fullPath('controllers/sensors-data.php');
                     <label for="captureSwitch" class="form-check-label">Captura Automática de Dados</label>
                 </div>
             </div>
+            <div id="alertMessage" class="bg-danger rounded-4 p-2 d-none my-2">
+                <p class="fw-bold text-center text-white">ALERTA: Sinais Vitais atingiram níveis preocupantes!</p>
+            </div>
             <div id="sensorsRecordsList">
                 <!-- Loaded dinamically with javascript -->
             </div>
