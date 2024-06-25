@@ -7,7 +7,7 @@ function recordSensorsData($user_id, $timestamp, $sensors){
         'user_id' => $user_id,
         'timestamp' => $timestamp,
         'sensors_data' => [
-            'heart_rate' => $sensors['body_temperature'],
+            'heart_rate' => $sensors['heart_rate'],
             'body_temperature' => $sensors['body_temperature'],
             'blood_oxygen' => $sensors['blood_oxygen'],
             'blood_pressure' => $sensors['blood_pressure']

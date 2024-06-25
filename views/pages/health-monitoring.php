@@ -9,7 +9,11 @@ require_once fullPath('controllers/sensors-data.php');
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <button id="captureBtn">Capturar Dados</button>
+            <div class="form-check form-switch">
+                <input id="captureSwitch" class="form-check-input" type="checkbox" role="switch">
+                <label for="captureSwitch" class="form-check-label">Captura Automática de Dados</label>
+            </div>
+            <button id="captureBtn">Capturar Dados Agora</button>
             <div>
                 <div>
                     <p>sensor 1</p>
