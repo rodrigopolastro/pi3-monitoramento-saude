@@ -26,4 +26,6 @@ function recordSensorsData($user_id, $timestamp, $sensors){
 
     global $sensors_data_collection;
     $sensors_data_collection->insertOne($document);
+
+    return $document;
 }

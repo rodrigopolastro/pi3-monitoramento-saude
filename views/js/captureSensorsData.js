@@ -47,6 +47,7 @@ async function recordSensorsData(params) {
         .then((response) => {
             if (response.was_inserted) {
                 console.log("Dados capturados corretamente!: \n" + params);
+                displaySensorsRecord(response.inserted_record)
             } else {
                 console.log("Ocorreu um erro na captura dos dados.");
             }

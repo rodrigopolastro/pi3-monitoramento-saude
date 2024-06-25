@@ -32,9 +32,10 @@ function controllerSensorsData($action)
             ];
 
             try {
-                recordSensorsData($user_id, $timestamp, $sensors);
+                $inserted_record = recordSensorsData($user_id, $timestamp, $sensors);
                 echo json_encode([
                     'was_inserted' => true,
+                    'inserted_record' => $inserted_record
                 ]);
 
             } catch (Exception $e) {
