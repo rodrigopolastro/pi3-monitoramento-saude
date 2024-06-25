@@ -19,24 +19,25 @@ require_once fullPath('controllers/sensors-data.php');
             </div>
         </div>
         <div class="col-6">
-            <div class="d-flex">
-                <div>Batimentos por Minuto</div>
-                <div>Temperatura Corporal</div>
-                <div>Oxigênio no Sangue</div>
-                <div>Pressão Sanguínea</div>
+            <div id="sensorsButtonsList" class="d-flex">
+                <button type="button" data-sensor-name="heart_rate" class="btn btn-outline-danger">Batimentos por Minuto</button>
+                <button type="button" data-sensor-name="body_temperature" class="btn btn-outline-warning">Temperatura Corporal</button>
+                <button type="button" data-sensor-name="blood_oxygen" class="btn btn-outline-primary">Oxigênio no Sangue</button>
+                <button type="button" data-sensor-name="blood_pressure" class="btn btn-outline-success">Pressão Sanguínea</button>
             </div>
-            <canvas id="sensorsGraph" width="400" height="180"></canvas>
+            <button id="updateBtn">Update</button>
+            <canvas id="sensorsCanvas" width="400" height="180"></canvas>
         </div>
     </div>
-    <button id="updateBtn">Update</button>
 </div>
+
+<!-- Biblioteca Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
 <script src="../js/sensorsGraph.js"></script>
 <script src="../js/displaySensorsRecord.js"></script>
 <script src="../js/listSensorsRecords.js"></script>
 <script src="../js/captureSensorsData.js"></script>
-<!-- Biblioteca Chart.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
 <?php
 require_once fullPath('views/components/footer.php');

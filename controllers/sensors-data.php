@@ -23,10 +23,13 @@ function controllerSensorsData($action)
             $limit = 10;
             $sensor_records = getRecordsFromSensor(
                 $_SESSION['user_id'],
-                'heart_rate',
+                $_POST['sensor_name'],
                 $limit,
             );
-            echo json_encode($sensor_records);
+            echo json_encode([
+                'records' => $sensor_records, 
+                'sensorName' => $_POST['sensor_name'],
+            ]);
             break;
 
         case 'insert_sensors_data':
