@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faça Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../assets/css/global-style.css">
+    <link rel="stylesheet" href="../../assets/css/general.css">
 </head>
 
 <body>
     <main>
-        <section>
-            <div class="container">
-                <div class="vh-100  d-flex justify-content-center align-items-center">
+        <section class="">
+            <div class="container py-5">
+                <div class="d-flex justify-content-center align-items-center">
                     <div class="w-50 bg-white p-5 rounded-3">
                         <h1 class="mb-3 text-center">Cadastre-se</h1>
                         <form action="../../controllers/users.php" method="POST" id="sign-up-form">

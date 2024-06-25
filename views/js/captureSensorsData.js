@@ -4,7 +4,7 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
 }
 
-const INTERVAL_IN_SECONDS = 2;
+const INTERVAL_IN_SECONDS = 5;
 const INTERVAL_IN_MS = INTERVAL_IN_SECONDS * 1000;
 
 var captureIntervalId;

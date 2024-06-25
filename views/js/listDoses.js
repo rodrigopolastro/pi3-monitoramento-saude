@@ -72,20 +72,28 @@ async function listDoses(params) {
 }
 
 function displayDoseDiv(parentElement, dose) {
+    let date = new Date()
+
     let doseHtml = `
-        <div class="" data-medicine-id="${dose.medicine_id}" data-dose-id="${
-        dose.dose_id
-    }">
+        <div class="p-3 rounded-4 bg-light-gray mb-3" data-medicine-id="${
+            dose.medicine_id
+        }" data-dose-id="${dose.dose_id}">
+            <p">Marcada para: ${dose.due_date} às ${dose.due_time}</p>
+            ${
+                dose.was_taken
+                ? `<p class="fw-bold text-success">Tomada em: ${dose.taken_date} às ${dose.taken_time}</p>`
+                : ""
+            }
+            <div class="d-flex align-items-center justify-content-between">
+            <h6>${dose.medicine_name}: ${dose.quantity_per_dose} ${
+                dose.measurement_unit
+    }       </h6>
             ${
                 dose.was_taken
                     ? `<button onclick="setDoseNotTaken(${dose.dose_id})" class="btn btn-danger">Desmarcar</button>`
                     : `<button onclick="takeDose(${dose.dose_id})" class="btn btn-success">Tomar Dose</button>`
             }
-            <p>Marcada para: ${dose.due_date} - ${dose.due_time}</p>
-            ${dose.was_taken ? `<p>Tomada em: ${dose.taken_date} - ${dose.taken_time}</p>` : ''}
-            <h6>${dose.medicine_name}: ${dose.quantity_per_dose} ${
-        dose.measurement_unit
-    }</h6>
+            </div>
         </div>
     `;
 
@@ -179,5 +187,3 @@ async function setDoseNotTaken(doseId) {
         console.error("Error in Request:", error);
     }
 }
-
-

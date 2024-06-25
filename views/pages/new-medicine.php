@@ -11,14 +11,10 @@ $measurement_units = controllerMedicineAttributes('select_measurement_units');
 
 <div class="container">
     <div class="my-2">
-        <div class="row justify-content-between">
-            <div class="col-3">
-                <h3>NOVO MEDICAMENTO</h3>
-            </div>
-        </div>
         <div class="row my-3">
             <div class="col-3"></div>
-            <div class="col-6 bg-light p-3">
+            <div class="col-6 bg-light rounded-4 p-3">
+                <h3 class="text-center">Novo Medicamento</h3>
                 <form action="../../controllers/medicines.php" method="POST">
                     <input type="hidden" name="action" value="insert_medicine">
                     <div class="mb-3">

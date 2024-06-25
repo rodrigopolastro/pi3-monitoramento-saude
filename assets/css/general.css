@@ -7,3 +7,16 @@ section {
 header, footer {
     background-color: rgb(3, 3, 58);
 }
+
+th, td {
+    text-align: center;
+}
+
+.bg-light-gray{
+    background-color: rgb(183, 180, 234);
+}
+
+#nextDosesDiv, #takenDosesDiv{
+    max-height: 400px;
+    padding-right: 15px;
+}

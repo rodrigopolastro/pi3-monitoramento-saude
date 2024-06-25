@@ -45,7 +45,9 @@ function sendToMonitoredUser($sendgrid, $dose_time, $email_content)
 
     try {
         $response = $sendgrid->send($email);
-        var_dump($response);
+        // echo '<pre>';
+        // var_dump($response);
+        // echo '</pre>';
     } catch (Exception $e) {
         echo 'Caught exception: ' . $e->getMessage() . "\n";
     }
@@ -66,7 +68,7 @@ function sendToCompanionUser($sendgrid, $dose_time, $email_content)
 
     try {
         $response = $sendgrid->send($email);
-        var_dump($response);
+        // var_dump($response);
     } catch (Exception $e) {
         echo 'Caught exception: ' . $e->getMessage() . "\n";
     }
