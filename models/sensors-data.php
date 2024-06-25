@@ -10,19 +10,23 @@ function getRecordsFromSensor($user_id, $sensor_name, $limit)
             'timestamp' => 1,
             'sensors_data.' . $sensor_name => 1
         ],
-        'limit' => $limit
+        'limit' => $limit,
+        'sort' => ['timestamp' => -1],
     ];
     global $sensors_data_collection;
     $cursor = $sensors_data_collection->find($filter, $options);
     $documents = $cursor->toArray();
-    
+
     return $documents;
 }
 
 function getSensorsRecords($user_id, $limit)
 {
     $filter = ['user_id' => $user_id];
-    $options = ['limit' => $limit];
+    $options = [
+        'limit' => $limit,
+        'sort' => ['timestamp' => -1],
+    ];
 
     global $sensors_data_collection;
     $cursor = $sensors_data_collection->find($filter, $options);

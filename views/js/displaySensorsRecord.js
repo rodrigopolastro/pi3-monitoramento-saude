@@ -1,5 +1,4 @@
-function displaySensorsRecord(sensorRecord) {
-    console.log(sensorRecord);
+function displaySensorsRecord(sensorRecord, insertStart=false) {
     let sensorRecordDiv = `
         <div class="">
             <p> ${sensorRecord.timestamp} </p>
@@ -11,5 +10,9 @@ function displaySensorsRecord(sensorRecord) {
     `;
 
     const sensorsRecordsList = document.getElementById("sensorsRecordsList");
-    sensorsRecordsList.innerHTML = sensorRecordDiv + sensorsRecordsList.innerHTML;
+    if(insertStart){
+        sensorsRecordsList.innerHTML = sensorRecordDiv + sensorsRecordsList.innerHTML;
+    } else {
+        sensorsRecordsList.innerHTML = sensorsRecordsList.innerHTML + sensorRecordDiv;
+    }
 }
