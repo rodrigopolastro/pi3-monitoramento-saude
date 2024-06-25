@@ -32,8 +32,9 @@ require_once fullPath('controllers/sensors-data.php');
 </div>
 
 <script src="../js/sensorsGraph.js"></script>
-<script src="../js/captureSensorsData.js"></script>
+<script src="../js/displaySensorsRecord.js"></script>
 <script src="../js/listSensorsRecords.js"></script>
+<script src="../js/captureSensorsData.js"></script>
 <!-- Biblioteca Chart.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 

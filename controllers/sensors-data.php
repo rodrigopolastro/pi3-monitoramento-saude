@@ -14,8 +14,19 @@ function controllerSensorsData($action)
 {
     switch ($action) {
         case 'select_sensors_data':
-            $sensors_records = getSensorsRecords($_SESSION['user_id']);
+            $limit = 15;
+            $sensors_records = getSensorsRecords($_SESSION['user_id'], $limit);
             echo json_encode($sensors_records);
+            break;
+
+        case 'select_sensor_data':
+            $limit = 10;
+            $sensor_records = getRecordsFromSensor(
+                $_SESSION['user_id'],
+                'heart_rate',
+                $limit,
+            );
+            echo json_encode($sensor_records);
             break;
 
         case 'insert_sensors_data':

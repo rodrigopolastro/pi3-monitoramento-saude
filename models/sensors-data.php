@@ -1,18 +1,38 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/pi3-monitoramento-saude/helpers/full-path.php';
 require_once fullPath('database/mongo-connection.php');
 
-function getSensorsRecords($user_id){
+function getRecordsFromSensor($user_id, $sensor_name, $limit)
+{
     $filter = ['user_id' => $user_id];
-
-    
+    $options = [
+        'projection' => [
+            'timestamp' => 1,
+            'sensors_data.' . $sensor_name => 1
+        ],
+        'limit' => $limit
+    ];
     global $sensors_data_collection;
-    $cursor = $sensors_data_collection->find($filter);
+    $cursor = $sensors_data_collection->find($filter, $options);
+    $documents = $cursor->toArray();
+    
+    return $documents;
+}
+
+function getSensorsRecords($user_id, $limit)
+{
+    $filter = ['user_id' => $user_id];
+    $options = ['limit' => $limit];
+
+    global $sensors_data_collection;
+    $cursor = $sensors_data_collection->find($filter, $options);
     $documents = $cursor->toArray();
 
     return $documents;
 }
 
-function recordSensorsData($user_id, $timestamp, $sensors){
+function recordSensorsData($user_id, $timestamp, $sensors)
+{
     $document = [
         'user_id' => $user_id,
         'timestamp' => $timestamp,
