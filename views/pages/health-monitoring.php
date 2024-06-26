@@ -1,4 +1,5 @@
 <?php
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/pi3-monitoramento-saude/helpers/full-path.php';
 require_once fullPath('scripts/session-authentication.php');
 require_once fullPath('views/components/header.php');
@@ -15,8 +16,8 @@ require_once fullPath('controllers/sensors-data.php');
                     <label for="captureSwitch" class="form-check-label">Captura Automática de Dados</label>
                 </div>
             </div>
-            <div id="alertMessage" class="bg-danger rounded-4 p-2 d-none my-2">
-                <p class="fw-bold text-center text-white">ALERTA: Sinais Vitais atingiram níveis preocupantes!</p>
+            <div id="alertMessage" class="d-flex justify-content-center bg-danger rounded-4 py-3 d-none my-2">
+                <span class="fw-bold text-center text-white w-100">ALERTA: Sinais Vitais atingiram níveis preocupantes!</span>
             </div>
             <div id="sensorsRecordsList">
                 <!-- Loaded dinamically with javascript -->

@@ -28,14 +28,14 @@ function controllerSensorsData($action)
                 $limit,
             );
             echo json_encode([
-                'records' => $sensor_records, 
+                'records' => $sensor_records,
                 'sensorName' => $_POST['sensor_name'],
             ]);
             break;
 
         case 'insert_sensors_data':
             $user_id = $_SESSION['user_id'];
-            
+
             $date = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
             $timestamp = $date->format('Y-m-d H:i:s');
 
@@ -48,14 +48,11 @@ function controllerSensorsData($action)
 
             try {
                 $inserted_record = recordSensorsData($user_id, $timestamp, $sensors);
-                $result = analyzeSensorData($timestamp, $sensors);
                 echo json_encode([
                     'was_inserted' => true,
                     'inserted_record' => $inserted_record,
-                    'is_alert_on' => $result
-                    // 'is_alert_on' => analyzeSensorData($timestamp, $sensors),
+                    'is_alert_on' => analyzeSensorData($timestamp, $sensors),
                 ]);
-            
             } catch (Exception $e) {
                 echo json_encode([
                     'was_inserted' => false,

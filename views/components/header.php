@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../assets/css/general.css" rel="stylesheet">
-    <title>Sistema Acadêmico</title>
+    <title>Sistema de Monitoramento Remoto de Saúde</title>
 </head> 
 
 <body>
@@ -15,7 +15,7 @@
             <div class="d-flex justify-content-between">
                 <!-- Titulo página -->
                 <div class="">
-                    <h3>Sistema de gerenciamento de saúde</h3>
+                    <h3>Sistema de Monitoramento Remoto de Saúde</h3>
                 </div>
 
                 <!-- Navbar -->

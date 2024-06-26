@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once fullPath('database/mysql-connection.php');
 
@@ -74,5 +74,4 @@ function createCompanionUser($companion_user)
     $statement->bindValue(':first_name', $companion_user['first_name']);
     $statement->bindValue(':last_name', $companion_user['last_name']);
     $statement->execute();
-
 }

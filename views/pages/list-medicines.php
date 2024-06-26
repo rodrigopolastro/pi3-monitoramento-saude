@@ -38,13 +38,13 @@ $medicines = controllerMedicines('select_medicines');
                             <tr>
                                 <td><?= $medicine['medicine_name'] ?></td>
                                 <!-- <td><?= $medicine['medicine_description'] ?></td> -->
-                                <?php 
-                                    $date = DateTimeImmutable::createFromFormat(
-                                        'Y-m-d',
-                                        $medicine['treatment_start_date'],
-                                        new DateTimeZone('America/Sao_Paulo')
-                                    );
-                                
+                                <?php
+                                $date = DateTimeImmutable::createFromFormat(
+                                    'Y-m-d',
+                                    $medicine['treatment_start_date'],
+                                    new DateTimeZone('America/Sao_Paulo')
+                                );
+
                                 ?>
                                 <td><?= $date->format("d/m/Y") ?></td>
                                 <td><?= ucfirst($medicine['frequency_type']) ?></td>

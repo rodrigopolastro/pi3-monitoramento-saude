@@ -16,10 +16,10 @@ const sensorsChart = new Chart(ctx, {
     options: {
         plugins: {
             legend: {
-                display: false
-            }
-        }
-    }
+                display: false,
+            },
+        },
+    },
 });
 
 window.addEventListener("load", () => {
@@ -70,5 +70,3 @@ function updateChart(newLabels, newData) {
     sensorsChart.data.labels = newLabels;
     sensorsChart.update();
 }
-
-

@@ -10,6 +10,7 @@ if (!isset($_SESSION)) {
 
 function scheduleDoseReminder($dose)
 {
+    // The emails should be sent asynchronously maybe with javascript
     $sendgrid = new \SendGrid(SENDGRID_API_KEY);
     $dose_time = DateTimeImmutable::createFromFormat(
         'Y-m-d H:i',
@@ -30,7 +31,6 @@ function scheduleDoseReminder($dose)
         <h3>Horário: " . $dose_time->format("d/m/Y") . ' às ' . $dose['due_time'] . '</h3>
         <p>Continue acompanhando a saúde de quem você ama conosco!</p>';
     sendToCompanionUser($sendgrid, $dose_time, $email_content);
-
 }
 
 function sendToMonitoredUser($sendgrid, $dose_time, $email_content)
@@ -45,9 +45,6 @@ function sendToMonitoredUser($sendgrid, $dose_time, $email_content)
 
     try {
         $response = $sendgrid->send($email);
-        // echo '<pre>';
-        // var_dump($response);
-        // echo '</pre>';
     } catch (Exception $e) {
         echo 'Caught exception: ' . $e->getMessage() . "\n";
     }
@@ -68,7 +65,6 @@ function sendToCompanionUser($sendgrid, $dose_time, $email_content)
 
     try {
         $response = $sendgrid->send($email);
-        // var_dump($response);
     } catch (Exception $e) {
         echo 'Caught exception: ' . $e->getMessage() . "\n";
     }

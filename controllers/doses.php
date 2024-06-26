@@ -91,6 +91,7 @@ function controllerDoses($action)
                     $dose['medicine_name'] = $_GET['medicine_name'];
 
                     // TODO: ONLY SCHEDULE DOSES OF THE DAY!
+                    // The sendGrid API can only schedule emails up to 72 hours in advance
                     scheduleDoseReminder($dose);
                 }
             }

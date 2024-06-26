@@ -8,8 +8,6 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-
-
 define('MIN_HEART_RATE', 60);
 define('MAX_HEART_RATE', 100);
 
@@ -22,49 +20,50 @@ define('MIN_BLOOD_PRESSURE', 85);
 define('MAX_BLOOD_PRESSURE', 125);
 
 
-function analyzeSensorData($timestamp, $sensors){
+function analyzeSensorData($timestamp, $sensors)
+{
     $alerts = [
-        'heart_rate' => [ 'alert' => false, 'message' => 'OK'],
-        'body_temperature' => [ 'alert' => false, 'message' => 'OK'],
-        'blood_oxygen' => [ 'alert' => false, 'message' => 'OK'],
-        'blood_pressure' => [ 'alert' => false, 'message' => 'OK'],
+        'heart_rate' => ['alert' => false, 'message' => 'OK'],
+        'body_temperature' => ['alert' => false, 'message' => 'OK'],
+        'blood_oxygen' => ['alert' => false, 'message' => 'OK'],
+        'blood_pressure' => ['alert' => false, 'message' => 'OK'],
     ];
 
-    if(intval($sensors['heart_rate']) < MIN_HEART_RATE){
+    if (intval($sensors['heart_rate']) < MIN_HEART_RATE) {
         $alerts['heart_rate']['alert'] = true;
         $alerts['heart_rate']['message'] = 'MUITO BAIXOS';
     }
-    if(intval($sensors['heart_rate']) > MAX_HEART_RATE){
+    if (intval($sensors['heart_rate']) > MAX_HEART_RATE) {
         $alerts['heart_rate']['alert'] = true;
         $alerts['heart_rate']['message'] = 'MUITO ALTOS';
     }
 
-    if(intval($sensors['body_temperature']) < MIN_BODY_TEMPERATURE){
+    if (intval($sensors['body_temperature']) < MIN_BODY_TEMPERATURE) {
         $alerts['body_temperature']['alert'] = true;
         $alerts['body_temperature']['message'] = 'MUITO BAIXA';
     }
-    if(intval($sensors['body_temperature']) > MAX_BODY_TEMPERATURE){
+    if (intval($sensors['body_temperature']) > MAX_BODY_TEMPERATURE) {
         $alerts['body_temperature']['alert'] = true;
         $alerts['body_temperature']['message'] = 'MUITO ALTA';
     }
 
-    if(intval($sensors['blood_oxygen']) < MIN_BLOOD_OXYGEN){
+    if (intval($sensors['blood_oxygen']) < MIN_BLOOD_OXYGEN) {
         $alerts['blood_oxygen']['alert'] = true;
         $alerts['blood_oxygen']['message'] = 'MUITO BAIXO';
     }
 
-    if(intval($sensors['blood_pressure']) < MIN_BLOOD_PRESSURE){
+    if (intval($sensors['blood_pressure']) < MIN_BLOOD_PRESSURE) {
         $alerts['blood_pressure']['alert'] = true;
         $alerts['blood_pressure']['message'] = 'MUITO BAIXA';
     }
-    if(intval($sensors['blood_pressure']) > MAX_BLOOD_PRESSURE){
+    if (intval($sensors['blood_pressure']) > MAX_BLOOD_PRESSURE) {
         $alerts['blood_pressure']['alert'] = true;
         $alerts['blood_pressure']['message'] = 'MUITO ALTA';
     }
 
     foreach ($alerts as $key => $array) {
-        if($array['alert']){
-            // sendAlert($timestamp, $sensors, $alerts);
+        if ($array['alert']) {
+            sendAlert($timestamp, $sensors, $alerts);
             return true;
             break;
         }
@@ -72,11 +71,12 @@ function analyzeSensorData($timestamp, $sensors){
     return false;
 }
 
-function sendAlert($timestamp, $sensors, $alerts){
+function sendAlert($timestamp, $sensors, $alerts)
+{
+    // The emails should be sent asynchronously maybe with javascript
     $email = new Mail();
     $email->setFrom(EMAIL_SENDER, 'Monitoramento de Saúde');
     $email->setSubject('ALERTA - Sinais Vitais Preocupantes!');
-    // $email->addTo($_SESSION['companion_user_email'], 'Example Recipient');
     $email->addTo($_SESSION['companion_user_email'], '');
 
     $formatted_time = DateTimeImmutable::createFromFormat(
@@ -85,7 +85,7 @@ function sendAlert($timestamp, $sensors, $alerts){
         new DateTimeZone('America/Sao_Paulo')
     );
 
-    $email_content = 
+    $email_content =
         "<p> Os sinais vitais de <strong>" .  $_SESSION['user_first_name'] .  $_SESSION['user_last_name'] . "</strong> atingiram níveis preocupantes </p>" .
         "<h1> Sinais Vitais: </h1>" .
         "<h3>Captura realizada em " . $formatted_time->format("d/m/Y") . ' às ' . $formatted_time->format("H:i:s") . '</h3>' .
@@ -94,27 +94,11 @@ function sendAlert($timestamp, $sensors, $alerts){
         "<p><strong>Oxigênio no Sangue: </strong>" . $sensors['blood_oxygen'] . '% - ' . $alerts['blood_oxygen']['message'] . "</p>" .
         "<p><strong>Pressão Sanguínea: </strong>" . $sensors['blood_pressure'] . ' mmHg - ' . $alerts['blood_pressure']['message'] . "</p>";
 
-    // echo $email_content;
-
     $email->addContent('text/html', $email_content);
 
     $sendgrid = new \SendGrid(SENDGRID_API_KEY);
     try {
         $response = $sendgrid->send($email);
-
-        // echo '<pre>';
-    //     // echo "<h3>Criando lembrete para dose " . $dose['dose_id'] . "</h3>";
-    //     // echo "Response status:" . $response->statusCode();
-
-        // echo 'enviando para: ' . $_SESSION['companion_user_email'];
-        // var_dump($response);
-    //     // $headers = array_filter($response->headers());
-    //     // echo "Response Headers\n";
-    //     // foreach ($headers as $header) {
-    //     //     echo " - " . $header . "\n";
-    //     // }
-    //     // echo '<hr>';
-        // echo '</pre>';
     } catch (Exception $e) {
         echo 'Caught exception: ' . $e->getMessage() . "\n";
     }

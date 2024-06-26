@@ -1,22 +1,30 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
 html,
 body,
 section {
     background-color: #e5e5e5;
 }
 
-header, footer {
+header,
+footer {
     background-color: rgb(3, 3, 58);
 }
 
-th, td {
+th,
+td {
     text-align: center;
 }
 
-.bg-light-gray{
+.bg-light-gray {
     background-color: rgb(183, 180, 234);
 }
 
-#nextDosesDiv, #takenDosesDiv{
+#nextDosesDiv,
+#takenDosesDiv {
     max-height: 400px;
     padding-right: 15px;
 }

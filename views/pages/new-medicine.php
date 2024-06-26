@@ -74,7 +74,7 @@ $measurement_units = controllerMedicineAttributes('select_measurement_units');
                     </div>
                     <label class="form-label">Horários das Doses</label>
                     <div id="dosesTimesDiv" class="">
-                        <input required                 type="time" name="dose_time_1" id="firstDoseTime" value="05:00" class="form-control w-100">
+                        <input required type="time" name="dose_time_1" id="firstDoseTime" value="05:00" class="form-control w-100">
                         <input readonly hidden disabled type="time" name="dose_time_2" id="secondDoseTime" class="form-control w-50 bg-secondary">
                         <input readonly hidden disabled type="time" name="dose_time_3" id="thirdDoseTime" class="form-control w-50 bg-secondary">
                         <input readonly hidden disabled type="time" name="dose_time_4" id="fourthDoseTime" class="form-control w-50 bg-secondary">
